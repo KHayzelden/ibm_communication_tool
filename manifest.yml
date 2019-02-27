@@ -1,6 +1,6 @@
 applications:
   - path: .
-    name: Watson Twitter Comm
+    name: WatsonTwitterComm
     environment_json: {}
     memory: 256M
     instances: 1
