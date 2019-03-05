@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>AI-Communication Tool</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+      <link rel="stylesheet" href="css/style.css">
+
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	 </head>
+	 
+   <body>
+      <div class="container-fluid">
+        <div class="row">
+
+          <nav class="col-sm-3 col-md-2 d-none d-sm-block text-white sidebar bg-info">
+
+            <ul class="nav nav-pills  flex-column">
+
+              <li class="nav-item p-2 bd-highlight mb-3 border-bottom">
+                  <img src="img/guest.png" width="75" height="75" class="img-fluid rounded-circle "
+                  alt="Generic placeholder thumbnail">
+                  <strong> User Name </strong> 
+              </li>
+
+              <li class="nav-item" id = "conversation">
+                <a class="nav-link active text-white" href="#" data-toggle="pill">Conversation</a>
+              </li>
+
+              <li class="nav-item" id = "new">
+                <a class="nav-link text-white" href="#" data-toggle="pill" >New Conversation</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="#"data-toggle="pill" >Independent Search</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="#" data-toggle="pill">Bookmark</a>
+              </li>
+
+              <li class="nav-item">
+                  <a class="nav-link text-white" href="#" data-toggle="pill" >Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="#" data-toggle="pill">Setting</a>
+                </li>
+
+            </ul>
+
+          </nav>
+      
+          <main role="main" class="col-sm-9 ml-sm-auto col-md-10 ">
+
+            <div class="row marketing pt-5" > 
+              <div class="col-lg-6 border-right">
+                             
+                <h4 class="border-bottom">Bookmarked Searches</h4>
+                
+                <div class="pull-left mt-2 mb-2">
+                    <button type="button" id = "editbutton" class="btn btn-outline-info " >Edit</button>
+                    <button type="button" id = "deleteButton" style = "visibility:hidden" class="btn btn-outline-danger" >Delete</button>
+                    <button type="button" id = "saveButton" style = "visibility:hidden"  class="btn btn-outline-success " >Save</button>
+                </div>
+
+
+                <div id="list-example0" class="list-group">
+                    
+                    <a class="list-group-item  d-flex justify-content-between align-items-center draggable="true" " href="#list-item-1">
+                      Item 1<span class="input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
+                    <a class="list-group-item  d-flex justify-content-between align-items-center draggable="true"" href="#list-item-1">Item 2<span class="input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
+                    <a class="list-group-item d-flex   justify-content-between align-items-center draggable="true"" href="#list-item-1">Item 3<span class="input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
+
+                    <a class="list-group-item d-flex  justify-content-between align-items-center draggable="true"" href="#list-item-1">Item 4<span class="input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
+                  </div>
+          
+                <div class="row justify-content-md-center">
+                    <button id="list-example1" type="button" class="btn btn-info mt-3 ">Add New searches to bookmark</button>
+                </div>
+            
+              </div>
+        
+              <div class="col-lg-6 ">
+                <h4 class="border-bottom">Bookmarked Sentences</h4>
+
+                <div class="pull-left mt-2 mb-2">
+                    <button type="button" id = "editbutton1" class="btn btn-outline-info" >Edit</button>
+                    <button type="button" id = "deleteButton1" style = "visibility:hidden" class="btn btn-outline-danger " >Delete</button>
+                    <button type="button" id = "saveButton1" style = "visibility:hidden"  class="btn btn-outline-success " >Save</button>
+                </div>
+
+                <div id="list-example" class="list-group">
+                    <a class="list-group-item  d-flex justify-content-between align-items-center draggable="true" " href="#list-item-1">
+                        Item 1<span class="input1 input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
+                      <a class="list-group-item  d-flex justify-content-between align-items-center draggable="true"" href="#list-item-1">Item 2<span class="input1 input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
+                      <a class="list-group-item d-flex   justify-content-between align-items-center draggable="true"" href="#list-item-1">Item 3<span class="input1 input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
+  
+                      <a class="list-group-item d-flex  justify-content-between align-items-center draggable="true"" href="#list-item-1">Item 4<span class="input1 input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
+                  </div>
+
+                  <div class="row justify-content-md-center">
+                      <button id="list-example2" type="button" class="btn btn-info mt-3">Add New sentences to bookmark</button>
+                  </div>
+              </div>
+              
+            </div>
+      
+          </main>
+
+        </div>
+      </div>
+      <script src="js/bookmark.js" charset="utf-8"></script>
+   </body>
+</html>
+

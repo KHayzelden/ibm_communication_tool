@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link href="css/book-mobile.css" rel="stylesheet" type="text/css" media="all" />
+<link type="text/css" rel="stylesheet" href="css/jquery.mmenu.all.css?v=5.4.4" />
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.2/css/mdui.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.standalone.css">
+
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.mmenu.min.all.js?v=5.4.4"></script>
+<script type="text/javascript" src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+
+</head>
+
+<body class="mdui-bottom-nav-fixed">
+	<div class="banner">
+		<div class="header-top">
+			<ul>
+				<li><span></span></li>
+				<li><span class="chrg"></span> </li>
+				<li>10:00 </li>
+			</ul>
+		</div>
+
+		<div class="banner-text">
+			<div class="menu">
+				<a href="#menu"><img src="img/menu-icon.png" alt=""/></a>
+				<nav id="menu">
+					<ul class="">
+						<li class="menu-title">MENU</li>
+						<li><a href="#"><span class="icons"> </span>Conversation</a></li>
+						<li><a href="#"><span class="icons icn2"> </span> Search</a></li>
+						<li><a href="#"><span class="icons icn3"> </span> Bookmark</a></li>
+						<li><a href="#"><span class="icons icn11"> </span> History</a></li>
+						<li><a href="#"><span class="icons icn6"> </span> Profile</a></li>
+						<li><a href="#"><span class="icons icn4"> </span> Setting</a></li>
+						<li><a href="#"><span class="icons icn5"> </span> Log out</a></li>
+					</ul> 	
+				</nav>
+					
+				<script type="text/javascript">
+					$(function() {
+						$("#menu").mmenu({
+							extensions 	: [ "theme-dark", "effect-listitems-slide" ],
+							iconPanels	: {add 		: true,visible		: 1},
+							navbar		: {add 		: false},
+							counters	: true
+						}).on( 'click','a[href^="#/"]',function() {
+							alert( "Thank you for clicking, but that's a demo link." );
+							return false;});
+					});
+
+				</script>	
+			</div>
+		</div>			
+	</div>
+
+	
+		  
+	<div class="mdui-p-a-2">
+		<div class="input-group mb-3">
+				<input type="text" id = "searchbar" class="form-control" placeholder="Search History" >
+				
+				<div class="input-group-append" id="button-addon4">
+						<button class="btn btn-outline-info" type="button">Search</button>
+				</div>
+		</div>
+
+		<button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="datepicker" >
+				Date
+		</button>
+
+				<button class = "btn btn-info btn-sm dropdown-toggle dropdown-toggle-split" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  <span id='textspan'>Rank: Default</span>
+				  <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dLabel">
+				  <li class="dropdown-item">Time</li>
+				  <li class="dropdown-item">Hot</li>
+				  <li class="dropdown-item">Date</li>
+				</ul>
+	
+		<button class="btn btn-danger btn-sm " type="button" id="clear" >
+			Clear
+		</button>
+
+		<div class="mdui-panels" mdui-panel="{accordion: true}">
+				<li class="mdui-subheader">26 Feb</li>
+				<div class="mdui-panel-item">
+					<div class="mdui-panel-item-header">First Search</div>
+					<div class="mdui-panel-item-body">
+						<ul class="mdui-list-dense">
+							<li class="mdui-list-item mdui-ripple">result 1</li>
+							<li class="mdui-list-item mdui-ripple">result 2</li>
+							<li class="mdui-list-item mdui-ripple">result 3</li>
+						</ul>
+					</div>
+				</div>
+
+				<li class="mdui-subheader">28 Feb</li>
+				<div class="mdui-panel-item">
+					<div class="mdui-panel-item-header">Second Search</div>
+					<div class="mdui-panel-item-body">
+						<ul class="mdui-list-dense">
+							<li class="mdui-list-item mdui-ripple">result 1</li>
+							<li class="mdui-list-item mdui-ripple">result 2</li>
+							<li class="mdui-list-item mdui-ripple">result 3</li>
+						</ul>
+				  </div>
+				</div>
+
+				<div class="mdui-panel-item">
+					<div class="mdui-panel-item-header">Third Search</div>
+					<div class="mdui-panel-item-body">
+						<ul class="mdui-list-dense">
+							<li class="mdui-list-item mdui-ripple">result 1</li>
+							<li class="mdui-list-item mdui-ripple">result 2</li>
+							<li class="mdui-list-item mdui-ripple">result 3</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+	</div>
+
+
+	<div class="mdui-bottom-nav mdui-bottom-nav-text-auto mdui-color-indigo-800">
+		<a href="javascript:void(0);" class="mdui-ripple mdui-ripple-white mdui-bottom-nav-active">
+			<i class="mdui-icon material-icons">people</i>
+			<label>Conversation</label>
+		</a>
+
+		<a href="javascript:void(0);" class="mdui-ripple mdui-ripple-white">
+			<i class="mdui-icon material-icons">search</i>
+			<label>Search</label>
+		</a>
+
+		<a href="javascript:void(0);" class="mdui-ripple mdui-ripple-white">
+			<i class="mdui-icon material-icons">book</i>
+			<label>Bookmark</label>
+		</a>
+						
+	</div>
+		
+	<script src="js/bookmark.js" charset="utf-8"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.2/js/mdui.min.js"></script>
+
+	
+
+	<script type="text/javascript">
+	$('#datepicker').datepicker({
+		autoclose: true
+	}).on('changeDate', function(e) {
+	console.log(e.format());
+	$("#datepicker").html(e.format());
+	
+});
+
+	$('.dropdown-menu').on('click', function(e) {
+	var $target = $(e.target);
+	$target.is('li') && $('#textspan').text($target.text())
+})
+
+	$('#clear').on('click', function(e) {
+		$("#datepicker").html('Date ');
+		$("#textspan").html('Rank: Default');
+	})
+
+	</script>	
+</body>
+</html>
