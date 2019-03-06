@@ -15,12 +15,34 @@ self.addEventListener('install', async event =>{
 self.addEventListener('fetch', event =>{
 	//console.log('fetch');
 
-	// cache first strategy
+	
 	const req = event.request;
-	event.respondWith(cacheFirst(req));
+	const url = new URL(req.url);
+
+// If we are fetching from our own site
+	if(url.origin == location.origin){
+		// cache first strategy
+		event.respondWith(cacheFirst(req));
+	} else{
+		// network first strategy
+		event.respondWith(networkFirst(req));
+	}
+
 });
 
 async function cacheFirst(req){
 	const cachedResponse = await caches.match(req);
 	return cachedResponse || fetch(req);
+}
+
+async function networkFirst(req){
+	const cache = await caches.open('aict-dynamic');
+
+	try{
+		const res = await fetch(req);
+		cache.put(req, res.clone()); // allows us to define the request, add not necessary
+		return res;
+	} catch(error){
+		return await cache.match(req);
+	}
 }

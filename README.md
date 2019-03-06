@@ -14,7 +14,10 @@ This application demonstrates a simple, reusable Node.js web application based o
 
 # Progressive Web Application 
 ## Useful Links and Notes
-- [Convert your current website into a PWA](https://www.youtube.com/watch?v=gcx-3qi7t7c)
+- [Convert your current website into a PWA: YouTube](https://www.youtube.com/watch?v=gcx-3qi7t7c) 
+	- Service Worker Configuration: (18:17)
+	- Cache First Approach: (22:55)
+	- Network First Approach: (27:00)
 - [Web App Manifest Generator](https://app-manifest.firebaseapp.com/) Useful for creating the manifest.json and image directories from a single uploaded image.
 - Inspect the localhost:6002 and look at the *Application* tab -> Manifest to check whether the Manifest has been configured successfully
 - Digital Color Meter: Press *shift + cmd + c* to extract the hexadecimal value of a colour
