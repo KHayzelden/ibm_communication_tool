@@ -1,23 +1,23 @@
 var express = require('express');
 var router = express.Router();
-var app = require('../app.js');
+var app = require('../app');
 var bodyParser= require("body-parser");
 
 router.get('/', function(req, res, next) {
     var names = [];
-    if(!app.db) {
-        console.log(names);
-        res.render('index', {title: 'Watson Titter Communication',user: names});
+    if(!app.useDb) {
+        res.render('index', {title: 'Watson Titter Communication',users: names});
         return;
     }
-    app.db.list({ include_docs: true }, function(err, body) {
+    app.useDb.list({ include_docs: true }, function(err, body) {
         if (!err) {
+            console.log(body);
             body.rows.forEach(function(row) {
+                console.log(row.doc);
                 if(row.doc.name)
                     names.push(row.doc.name);
             });
-            console.log(names);
-            res.render('index', {title: 'Watson Titter Communication', user: names});
+            res.render('index', {title: 'Watson Titter Communication', users: names});
         }
     });
 
@@ -30,19 +30,18 @@ router.post('/add_name', function (req, res, next)  {
         return;
     }
     var userName = req.body.name;
-    var doc = { "name" : userName };
-    if(!app.db) {
-        console.log("No database.");
+    var users = { "name" : userName };
+    if(!app.useDb) {
         res.render('index', {title: 'Watson Titter Communication'});
         return;
     }
 
-    app.db.insert(doc, function(err, body, header) {
+    app.useDb.insert(users, function(err, body, header) {
         if (err) {
-            console.log('[mydb.insert] ', err.message);
+            console.log('[watsoncommdb.insert] ', err.message);
             res.send("Error");
         }
-        doc._id = body.id;
+        users._id = body.id;
         res.redirect("/");
     });
 });

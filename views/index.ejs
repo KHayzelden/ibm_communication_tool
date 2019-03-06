@@ -24,6 +24,9 @@
                     <input type="submit" name="submit" value="submit" class="btn btn-default">
                 </div>
             </form>
+            <% users.forEach(function (user) { %>
+                <li><%=user%></li>
+            <%})%>
 
         </td>
     </tr>
