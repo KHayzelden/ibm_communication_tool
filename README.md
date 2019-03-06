@@ -21,3 +21,4 @@ This application demonstrates a simple, reusable Node.js web application based o
 - Place the manifest.json in the public directory
 - Place the icons directory (with multiple images of varying sizes in the public/images directory)
 - Create an empty views/sw.js file in the views directory (the same directory as the index.ejs)
+- Define paths for static assets within both Service Worker files (especially the one in the public/sw.js directory) 
