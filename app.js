@@ -107,3 +107,24 @@ app.listen(appEnv.port, '0.0.0.0', function() {
 });
 
 // console.log(module.exports);
+
+// window.addEventListener('load', e => {
+//     if('serviceWorker' in navigator){
+//         try{
+//             navigator.serviceWorker.register('sw.js');
+//             console.log('SW registered');
+//         } catch(){
+//             console.log('SW failed :(')
+//         }
+//     }
+// });
+
+
+
+// const apiKey = '40611f50472445186154e9a1b5901c5'
+// async function updateNews(){
+//     const res = await fetch(`https://newsapi.org/v2/everything?q=bitcoin&from=2019-02-06&sortBy=publishedAt&apiKey={$apiKey}`);
+//     const json = await res.json();
+
+// }
+
