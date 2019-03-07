@@ -24,6 +24,8 @@ var path = require('path');
 
 var cloudant, useDb;
 
+
+
 // load local VCAP configuration  and service credentials
 var vcapLocal;
 try {
@@ -34,7 +36,9 @@ const appEnvOpts = vcapLocal ? { vcap: vcapLocal} : {};
 
 // get the app environment
 const appEnv = cfenv.getAppEnv(appEnvOpts);
+const isLocal = appEnv.isLocal;
 
+const config = getLocalConfig();
 
 // Load the Cloudant library.
 var Cloudant = require('@cloudant/cloudant');
@@ -52,12 +56,12 @@ if (appEnv.services['cloudantNoSQLDB'] || appEnv.getService(/cloudant/)) {
 } else if (process.env.CLOUDANT_URL){
     cloudant = Cloudant(process.env.CLOUDANT_URL);
 }
+
 if(cloudant != null) {
     //database name
     var dbName = 'watsoncommdb';
 
     cloudant.db.list(function(err, allDbs) {
-        console.log('All my databases: %s', allDbs.join(', '));
         if(! (allDbs.indexOf(dbName) > -1)) {
             // Create a new "mydb" database.
             cloudant.db.create(dbName, function(err, data) {
@@ -112,19 +116,8 @@ passport.deserializeUser(function(obj, cb) {
     cb(null, obj);
 });
 
-// load localdev configuration and service credentials
-var localdev;
-try {
-    localdev = require('./localdev-config.json');
-} catch (e) { }
-
-passport.use(new WebAppStrategy({
-    tenantId: localdev["tenantId"],
-    clientId: localdev["clientId"],
-    secret: localdev["secret"],
-    oauthServerUrl: localdev["oauthServerUrl"],
-    redirectUri: appEnv.url + CALLBACK_URL
-}));
+let webAppStrategy = new WebAppStrategy(config);
+passport.use(webAppStrategy);
 
 // Callback to finish the authorization process. Will retrieve access and identity tokens/
 // from AppID service and redirect to either (in below order)
@@ -157,6 +150,33 @@ app.listen(appEnv.port, '0.0.0.0', function() {
   // print a message when the server starts listening
   console.log("server starting on " + appEnv.url);
 });
+
+function getLocalConfig() {
+    if (!isLocal) {
+        return {};
+    }
+
+    // load localdev configuration and service credentials
+    var localdev;
+    try {
+        localdev = require('./localdev-config.json');
+    } catch (e) { }
+    let config = {
+        tenantId: localdev["tenantId"],
+        clientId: localdev["clientId"],
+        secret: localdev["secret"],
+        oauthServerUrl: localdev["oauthServerUrl"],
+        redirectUri: appEnv.url + CALLBACK_URL
+    };
+    if (localdev.version) {
+        config.version = localdev.version;
+    }
+
+    if (localdev.appidServiceEndpoint) {
+        config.appidServiceEndpoint = localdev.appidServiceEndpoint;
+    }
+    return config;
+}
 
 // console.log(module.exports);
 
