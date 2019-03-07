@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="appicon" sizes="76x76" href="../assets/img/appicon.png">
+    <link rel="icon" type="image/png" href="../assets/img/icon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>AI Communication Tool</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    
+    <!-- Fonts and icons -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    
+    <!-- CSS Files -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="css/book-mobile.css" rel="stylesheet" type="text/css" media="all" />
+    <link type="text/css" rel="stylesheet" href="css/jquery.mmenu.all.css?v=5.4.4" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.2/css/mdui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.standalone.css">
+    
+    <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+    
+    <script type="text/javascript" src="js/jquery.mmenu.min.all.js?v=5.4.4"></script>
+    <script type="text/javascript" src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar" data-color="blue">
+            <div class="sidebar-wrapper">
+                <div class="logo"> <!-- the users icon? -->
+                    <a href="http://www.google.com" class="simple-text"> <!-- link to the profile page -->
+                        USER'S NAME
+                    </a>
+                </div>
+                <ul class="nav">
+                    <li>
+                        <a class="nav-link" href="search.html">
+                            <i class="nc-icon nc-zoom-split"></i>
+                            <p>Search</p>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="search_history.html">
+                            <i class="nc-icon nc-single-copy-04"></i>
+                            <p>History</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="bookmarks.html">
+                            <i class="nc-icon nc-tag-content"></i>
+                            <p>Bookmarks</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="account.html">
+                            <i class="nc-icon nc-circle-09"></i>
+                            <p>Account</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="">
+                            <i class="nc-icon nc-button-power"></i>
+                            <p>Log Out</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="settings.html">
+                            <i class="nc-icon nc-settings-gear-64"></i>
+                            <p>Settings</p>
+                        </a>
+                    </li>
+                    <li class="nav-item active active-pro">
+                        <a class="nav-link active" href="help.html">
+                            <i class="nc-icon nc-puzzle-10"></i>
+                            <p>Help</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="main-panel">
+            
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+                <div class=" container-fluid  ">
+                    <a class="navbar-brand"> Search History </a>
+                    <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                    </button>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="card ">    
+                        <div class="card-header ">
+                            <!--<h4 class="card-title">Search</h4>-->
+                        </div>
+                        
+                        <div class="card-body ">
+                            <div class="input-group mb-3">
+                                    <input type="text" id = "searchbar" class="form-control" placeholder="Search within history..." style="border-color:#4091e2; color:#000000;">
+
+                                    <div class="input-group-append" id="button-addon4">
+                                            <button class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;" onclick="">
+                                                    <i class="fa fa-search" style="color: #FFFFFF;"></i>  Search</button>
+                                            <button class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;" id="datepicker">
+                                                        <i class="fa fa-calendar" style="color: #FFFFFF;"></i>  Date </button>
+                                    </div>
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
+                                  <div class="card card-plain">
+                                    <div class="card-header ">
+                                        <h4 class="card-title"><B>History</B></h4>
+                                        <p class="card-category">Select a previous search to see its results</p>
+                                    </div>
+                                      
+                                    <div class="col-md-12">
+                                        <div class="mdui-panels" mdui-panel="{accordion: true}">
+                                            <li class="mdui-subheader">26 Feb</li>
+                                            <div class="mdui-panel-item">
+                                                <div class="mdui-panel-item-header">First Search</div>
+                                                <div class="mdui-panel-item-body">
+                                                    <ul class="mdui-list-dense">
+                                                        <li class="mdui-list-item mdui-ripple">result 1</li>
+                                                        <li class="mdui-list-item mdui-ripple">result 2</li>
+                                                        <li class="mdui-list-item mdui-ripple">result 3</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <li class="mdui-subheader">28 Feb</li>
+                                            <div class="mdui-panel-item">
+                                                <div class="mdui-panel-item-header">Second Search</div>
+                                                <div class="mdui-panel-item-body">
+                                                    <ul class="mdui-list-dense">
+                                                        <li class="mdui-list-item mdui-ripple">result 1</li>
+                                                        <li class="mdui-list-item mdui-ripple">result 2</li>
+                                                        <li class="mdui-list-item mdui-ripple">result 3</li>
+                                                    </ul>
+                                              </div>
+                                            </div>
+
+                                            <div class="mdui-panel-item">
+                                                <div class="mdui-panel-item-header">Third Search</div>
+                                                <div class="mdui-panel-item-body">
+                                                    <ul class="mdui-list-dense">
+                                                        <li class="mdui-list-item mdui-ripple">result 1</li>
+                                                        <li class="mdui-list-item mdui-ripple">result 2</li>
+                                                        <li class="mdui-list-item mdui-ripple">result 3</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>       
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+    
+    
+<!--   Core JS Files   -->
+<script src="../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
+<script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+<script src="../assets/js/plugins/bootstrap-switch.js"></script>
+<!--  Google Maps Plugin    -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!--  Chartist Plugin  -->
+<script src="../assets/js/plugins/chartist.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="../assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+<script src="../assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
+<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+<script src="../assets/js/demo.js"></script>
+
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.mmenu.min.all.js?v=5.4.4"></script>
+<script type="text/javascript" src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
+    
+    <script src="../assets/js/bookmark.js" charset="utf-8"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.2/js/mdui.min.js"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+    
+    
+<script type="text/javascript">
+	$('#datepicker').datepicker({
+		autoclose: true
+	}).on('changeDate', function(e) {
+	console.log(e.format());
+	$("#datepicker").html(e.format());
+	
+});
+
+	$('.dropdown-menu').on('click', function(e) {
+	var $target = $(e.target);
+	$target.is('li') && $('#textspan').text($target.text())
+})
+
+	$('#clear').on('click', function(e) {
+		$("#datepicker").html('Date ');
+		$("#textspan").html('Rank: Default');
+	})
+
+	</script>
+</html>

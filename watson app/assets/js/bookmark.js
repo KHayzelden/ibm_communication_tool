@@ -4,16 +4,18 @@ $("#editbutton").click(function(){
     if($(this).html() == "Edit")
     {
         $("#editbutton").text("Cancel");
-        $("#saveButton").attr("style","visibility:visible");
-        $("#deleteButton").attr("style","visibility:visible");
-        $(".input").attr("style","visibility:visible");
+        $("#saveButton").attr("style","display:inline-block");
+        $("#editCaption").attr("style","display:block");
+        $("#deleteButton").attr("style","display:inline-block");
+        $(".input").attr("style","display:inline-block");
     }
     else if($(this).html() == "Cancel")
     {
         $("#editbutton").text("Edit");
-        $("#saveButton").attr("style","visibility:hidden");
-        $("#deleteButton").attr("style","visibility:hidden");
-        $(".input").attr("style","visibility:hidden");
+        $("#saveButton").attr("style","display:none");
+        $("#editCaption").attr("style","display:none");
+        $("#deleteButton").attr("style","display:none");
+        $(".input").attr("style","display:none");
     }
     
     });
@@ -23,17 +25,19 @@ $("#editbutton").click(function(){
         console.log($(this).html());
         if($(this).html() == "Edit")
         {
-            $("#editbutton1").text("Cancel");
-            $("#saveButton1").attr("style","visibility:visible");
-            $("#deleteButton1").attr("style","visibility:visible");
-            $(".input1").attr("style","visibility:visible");
+            $("#editbutton1").text("Cancel")       
+            $("#saveButton1").attr("style","display:inline-block");
+            $("#editCaption1").attr("style","display:block");
+            $("#deleteButton1").attr("style","display:inline-block");
+            $(".input1").attr("style","display:inline-block");
         }
         else if($(this).html() == "Cancel")
         {
             $("#editbutton1").text("Edit");
-            $("#saveButton1").attr("style","visibility:hidden");
-            $("#deleteButton1").attr("style","visibility:hidden");
-            $(".input1").attr("style","visibility:hidden");
+            $("#saveButton1").attr("style","display:none");
+            $("#editCaption1").attr("style","display:none");
+            $("#deleteButton1").attr("style","display:none");
+            $(".input1").attr("style","display:none");
         }
         
         });

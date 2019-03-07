@@ -18,13 +18,11 @@
         <div class="row">
 
           <nav class="col-sm-3 col-md-2 d-none d-sm-block text-white sidebar bg-info">
-
             <ul class="nav nav-pills  flex-column">
-
               <li class="nav-item p-2 bd-highlight mb-3 border-bottom">
-                  <img src="img/guest.png" width="75" height="75" class="img-fluid rounded-circle "
+                <img src="img/guest.png" width="75" height="75" class="img-fluid rounded-circle "
                   alt="Generic placeholder thumbnail">
-                  <strong> User Name </strong> 
+                <strong> User Name </strong> 
               </li>
 
               <li class="nav-item" id = "conversation">
@@ -34,20 +32,22 @@
               <li class="nav-item" id = "new">
                 <a class="nav-link text-white" href="#" data-toggle="pill" >New Conversation</a>
               </li>
+
               <li class="nav-item">
                 <a class="nav-link text-white" href="#"data-toggle="pill" >Independent Search</a>
               </li>
+
               <li class="nav-item">
                 <a class="nav-link text-white" href="#" data-toggle="pill">Bookmark</a>
               </li>
 
               <li class="nav-item">
-                  <a class="nav-link text-white" href="#" data-toggle="pill" >Profile</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-white" href="#" data-toggle="pill">Setting</a>
-                </li>
+                <a class="nav-link text-white" href="#" data-toggle="pill" >Profile</a>
+              </li>
 
+              <li class="nav-item">
+                <a class="nav-link text-white" href="#" data-toggle="pill">Setting</a>
+              </li>
             </ul>
 
           </nav>
@@ -55,54 +55,51 @@
           <main role="main" class="col-sm-9 ml-sm-auto col-md-10 ">
 
             <div class="row marketing pt-5" > 
-              <div class="col-lg-6 border-right">
-                             
+              <div class="col-lg-6 border-right">              
                 <h4 class="border-bottom">Bookmarked Searches</h4>
-                
                 <div class="pull-left mt-2 mb-2">
-                    <button type="button" id = "editbutton" class="btn btn-outline-info " >Edit</button>
+                    <button type="button" id = "editbutton" class="btn btn-outline-primary " >Edit</button>
                     <button type="button" id = "deleteButton" style = "visibility:hidden" class="btn btn-outline-danger" >Delete</button>
                     <button type="button" id = "saveButton" style = "visibility:hidden"  class="btn btn-outline-success " >Save</button>
                 </div>
 
-
-                <div id="list-example0" class="list-group">
-                    
+                <div class="pre-scrollable" style="width: 500px; height: 800px;">
+                  <div id="list-example0" class="list-group">
                     <a class="list-group-item  d-flex justify-content-between align-items-center draggable="true" " href="#list-item-1">
-                      Item 1<span class="input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
-                    <a class="list-group-item  d-flex justify-content-between align-items-center draggable="true"" href="#list-item-1">Item 2<span class="input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
-                    <a class="list-group-item d-flex   justify-content-between align-items-center draggable="true"" href="#list-item-1">Item 3<span class="input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
-
-                    <a class="list-group-item d-flex  justify-content-between align-items-center draggable="true"" href="#list-item-1">Item 4<span class="input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
+                        Item 1<span class="input input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
+                    <a class="list-group-item  d-flex justify-content-between align-items-center draggable="true"" href="#list-item-1">Item 2<span class="input input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
+                    <a class="list-group-item d-flex   justify-content-between align-items-center draggable="true"" href="#list-item-1">Item 3<span class="input input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
+                    <a class="list-group-item d-flex  justify-content-between align-items-center draggable="true"" href="#list-item-1">Item 4<span class="input input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
                   </div>
+                </div>
           
                 <div class="row justify-content-md-center">
-                    <button id="list-example1" type="button" class="btn btn-info mt-3 ">Add New searches to bookmark</button>
+                  <button id="list-example1" type="button" class="btn btn-primary mt-3 ">Add New Searches</button>
                 </div>
-            
               </div>
         
               <div class="col-lg-6 ">
                 <h4 class="border-bottom">Bookmarked Sentences</h4>
-
                 <div class="pull-left mt-2 mb-2">
-                    <button type="button" id = "editbutton1" class="btn btn-outline-info" >Edit</button>
-                    <button type="button" id = "deleteButton1" style = "visibility:hidden" class="btn btn-outline-danger " >Delete</button>
-                    <button type="button" id = "saveButton1" style = "visibility:hidden"  class="btn btn-outline-success " >Save</button>
+                  <button type="button" id = "editbutton1" class="btn btn-outline-primary" >Edit</button>
+                  <button type="button" id = "deleteButton1" style = "visibility:hidden" class="btn btn-outline-danger " >Delete</button>
+                  <button type="button" id = "saveButton1" style = "visibility:hidden"  class="btn btn-outline-success " >Save</button>
+ 
                 </div>
 
-                <div id="list-example" class="list-group">
-                    <a class="list-group-item  d-flex justify-content-between align-items-center draggable="true" " href="#list-item-1">
-                        Item 1<span class="input1 input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
+                <div class="pre-scrollable" style="width: 500px; height: 800px;">
+                  <div id="list-example" class="list-group">
+                      <a class="list-group-item  d-flex justify-content-between align-items-center draggable="true" " href="#list-item-1">
+                          Item 1<span class="input1 input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
                       <a class="list-group-item  d-flex justify-content-between align-items-center draggable="true"" href="#list-item-1">Item 2<span class="input1 input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
                       <a class="list-group-item d-flex   justify-content-between align-items-center draggable="true"" href="#list-item-1">Item 3<span class="input1 input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
-  
                       <a class="list-group-item d-flex  justify-content-between align-items-center draggable="true"" href="#list-item-1">Item 4<span class="input1 input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>
                   </div>
+                </div>
 
-                  <div class="row justify-content-md-center">
-                      <button id="list-example2" type="button" class="btn btn-info mt-3">Add New sentences to bookmark</button>
-                  </div>
+                <div class="row justify-content-md-center">
+                    <button id="list-example2" type="button" class="btn btn-primary mt-3">Add New Sentences</button>
+                </div>
               </div>
               
             </div>
