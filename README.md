@@ -12,6 +12,8 @@ This application demonstrates a simple, reusable Node.js web application based o
 
 [Install Node.js]: https://nodejs.org/en/download/
 
+1. Ensure to have a copy of the localdev-config.json and vcap-local.json file 
+
 # Progressive Web Application 
 ## Useful Links and Notes
 - [Convert your current website into a PWA: YouTube](https://www.youtube.com/watch?v=gcx-3qi7t7c) 
