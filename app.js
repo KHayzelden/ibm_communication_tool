@@ -12,7 +12,6 @@ const session = require('express-session');
 const passport = require('passport');
 const appID = require("ibmcloud-appid");
 
-
 const helmet = require("helmet");
 const express_enforces_ssl = require("express-enforces-ssl");
 const cookieParser = require("cookie-parser");
@@ -56,7 +55,6 @@ app.use(flash());
 var Cloudant = require('@cloudant/cloudant');
 
 if (appEnv.services['cloudantNoSQLDB'] || appEnv.getService(/cloudant/)) {
-
     // Initialize database with credentials
     if (appEnv.services['cloudantNoSQLDB']) {
         // CF service named 'cloudantNoSQLDB'
@@ -109,14 +107,6 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.use(function(req, res, next){
-    res.locals.title = 'Watson Twitter Communication';
-    res.locals.currentUser = req.user;
-    res.locals.success = req.flash('success');
-    res.locals.errors = req.flash('error');
-    next();
-});
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -141,6 +131,14 @@ passport.deserializeUser(function(obj, cb) {
     cb(null, obj);
 });
 
+
+app.use(function(req, res, next){
+    res.locals.title = 'Watson Twitter Communication';
+    res.locals.currentUser = req.user;
+    res.locals.success = req.flash('success');
+    res.locals.errors = req.flash('error');
+    next();
+});
 // Explicit login endpoint. Will always redirect browser to login widget due to {forceLogin: true}.
 // If forceLogin is set to false redirect to login widget will not occur of already authenticated users.
 app.get(LOGIN_URL, passport.authenticate(WebAppStrategy.STRATEGY_NAME, {
@@ -150,15 +148,15 @@ app.get(LOGIN_URL, passport.authenticate(WebAppStrategy.STRATEGY_NAME, {
 function storeRefreshTokenInCookie(req, res, next) {
     if (req.session[WebAppStrategy.AUTH_CONTEXT] && req.session[WebAppStrategy.AUTH_CONTEXT].refreshToken) {
         const refreshToken = req.session[WebAppStrategy.AUTH_CONTEXT].refreshToken;
-        /* An example of storing user's refresh-token in a cookie with expiration of a month */
-        res.cookie('refreshToken', refreshToken, {maxAge: 1000 * 60 * 60 * 24 * 30 /* 30 days */});
+        /* storing user's refresh-token in a cookie with expiration of a year */
+        res.cookie('refreshToken', refreshToken, {maxAge: 1000 * 60 * 60 * 24 * 365 /* 365 days */});
     }
     next();
 }
 
-function isLoggedIn(req) {
+exports.isLoggedIn = function(req) {
     return req.session[WebAppStrategy.AUTH_CONTEXT];
-}
+};
 
 // Callback to finish the authorization process. Will retrieve access and identity tokens/
 // from AppID service and redirect to either (in below order)
@@ -176,7 +174,7 @@ app.get(CALLBACK_URL, passport.authenticate(WebAppStrategy.STRATEGY_NAME));
 // Protected area. If current user is not authenticated - redirect to the login widget will be returned.
 // In case user is authenticated - a page with current user information will be returned.
 app.get("/protected", function tryToRefreshTokensIfNotLoggedIn(req, res, next) {
-    if (isLoggedIn(req)) {
+    if (module.exports.isLoggedIn(req)) {
         return next();
     }
 
@@ -188,23 +186,17 @@ app.get("/protected", function tryToRefreshTokensIfNotLoggedIn(req, res, next) {
     console.log(accessToken);
     var isGuest = req.user.amr[0] === "appid_anon";
     var isCD = req.user.amr[0] === "cloud_directory";
-    var preference = {font: "10", view: "complex"};
+    var preference;
     var firstLogin;
     // get the attributes for the current user:
     userProfileManager.getAllAttributes(accessToken).then(function (attributes) {
         var toggledItem = req.query.foodItem;
         preference = attributes.preference ? JSON.parse(attributes.preference) : [];
         firstLogin = !isGuest && !attributes.points;
-        if (!toggledItem) {
+        if (!firstLogin) {
             return;
         }
-        // var selectedItemIndex = preference.indexOf(toggledItem);
-        // if (selectedItemIndex >= 0) {
-        //     preference.splice(selectedItemIndex, 1);
-        // } else {
-        //     preference.push(toggledItem);
-        // }
-        // update the user's selection
+        preference = {font: "10", view: "complex"};
         return userProfileManager.setAttribute(accessToken, "preference", JSON.stringify(preference));
     }).then(function () {
         renderProfile(req, res, preference, isGuest, isCD, firstLogin);
@@ -215,7 +207,7 @@ app.get("/protected", function tryToRefreshTokensIfNotLoggedIn(req, res, next) {
 
 // Protected area. If current user is not authenticated - an anonymous login process will trigger.
 // In case user is authenticated - a page with current user information will be returned.
-app.get("/anon_login", passport.authenticate(WebAppStrategy.STRATEGY_NAME, {allowAnonymousLogin: true, successRedirect : '/protected', forceLogin: true}));
+app.get("/guest_login", passport.authenticate(WebAppStrategy.STRATEGY_NAME, {allowAnonymousLogin: true, successRedirect : '/search', forceLogin: true}));
 
 // Protected area. If current user is not authenticated - redirect to the login widget will be returned.
 // In case user is authenticated - a page with current user information will be returned.
@@ -225,8 +217,10 @@ app.get("/logout", function(req, res, next) {
     WebAppStrategy.logout(req);
     // If you chose to store your refresh-token, don't forgot to clear it also in logout:
     res.clearCookie("refreshToken");
-    res.redirect("/");
+    res.redirect("/search");
 });
+
+app.get("/register", passport.authenticate(WebAppStrategy.STRATEGY_NAME, {successRedirect: "/login", show: WebAppStrategy.SIGN_UP}));
 
 app.get("/token", function(req, res){
     //return the token data
@@ -238,7 +232,7 @@ app.get("/userInfo", passport.authenticate(WebAppStrategy.STRATEGY_NAME), functi
     //return the user info data
     userProfileManager.getUserInfo(req.session[WebAppStrategy.AUTH_CONTEXT].accessToken).then(function (userInfo) {
         res.setHeader('Content-Type', 'application/json');
-        res.send(userInfo);
+        res.send(userInfo.identities);
     }).catch(function() {
         res.setHeader('Content-Type', 'application/json');
         res.send({infoError: 'infoError'});
@@ -246,12 +240,12 @@ app.get("/userInfo", passport.authenticate(WebAppStrategy.STRATEGY_NAME), functi
 });
 
 app.get("/change_password", passport.authenticate(WebAppStrategy.STRATEGY_NAME, {
-    successRedirect: '/protected',
+    successRedirect: '/search',
     show: WebAppStrategy.CHANGE_PASSWORD
 }));
 
 app.get("/change_details", passport.authenticate(WebAppStrategy.STRATEGY_NAME, {
-    successRedirect: '/protected',
+    successRedirect: '/search',
     show: WebAppStrategy.CHANGE_DETAILS
 }));
 
@@ -288,23 +282,22 @@ function renderProfile(req, res, preferences, isGuest, isCD, firstLogin) {
         email = req.user.email.substr(0,req.user.email.indexOf('@'));
     var renderOptions = {
         name: req.user.name || email || "Guest",
-        // picture: req.user.picture || "fa profile",
         preferences: JSON.stringify(preferences),
         topHintText: isGuest ? "Login to get access to all features" : "",
-        topHintClickAction : isGuest ? ' window.location.href = "/login";' : ";",
         hintText,
         isGuest,
         isCD
     };
 
     if (firstLogin) {
-        userProfileManager.setAttribute(req.session[WebAppStrategy.AUTH_CONTEXT].accessToken, "points", "150").then(function (attributes) {
+        userProfileManager.setAttribute(req.session[WebAppStrategy.AUTH_CONTEXT].accessToken, "points", "100").then(function (attributes) {
             res.send(renderOptions);
         });
     } else {
         res.send(renderOptions);
     }
 }
+
 function getLocalConfig() {
     if (!isLocal) {
         return {};

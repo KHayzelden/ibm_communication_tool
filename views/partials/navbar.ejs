@@ -40,39 +40,39 @@
         </div>
         <ul class="nav">
             <% if (page_name === 'search') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
-                <a class="nav-link" href="./search">
+                <a class="nav-link" href="/search">
                     <i class="nc-icon nc-zoom-split"></i>
                     <p>Search</p>
                 </a>
             </li>
 
-            <% if (loggedIn === true) { %>
+            <% if (currentUser) { %>
                 <% if (page_name === 'search_history') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
-                    <a class="nav-link" href="./search_history">
+                    <a class="nav-link" href="/search_history">
                         <i class="nc-icon nc-single-copy-04"></i>
                         <p>History</p>
                     </a>
                 </li>
                 <% if (page_name === 'bookmarks') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
-                    <a class="nav-link" href="./bookmarks">
+                    <a class="nav-link" href="/bookmarks">
                         <i class="nc-icon nc-tag-content"></i>
                         <p>Bookmarks</p>
                     </a>
                 </li>
                 <% if (page_name === 'account') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
-                    <a class="nav-link" href="./account">
+                    <a class="nav-link" href="/account">
                         <i class="nc-icon nc-circle-09"></i>
                         <p>Account</p>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="./login">
+                    <a class="nav-link" href="/logout">
                         <i class="nc-icon nc-button-power"></i>
                         <p>Log Out</p>
                     </a>
                 </li>
                 <% if (page_name === 'settings') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
-                    <a class="nav-link" href="./settings">
+                    <a class="nav-link" href="/settings">
                         <i class="nc-icon nc-settings-gear-64"></i>
                         <p>Settings</p>
                     </a>
@@ -80,13 +80,13 @@
             <% } 
             else { %>
                 <li>
-                    <a class="nav-link" href="./register">
+                    <a class="nav-link" href="/register">
                         <i class="nc-icon nc-circle-09"></i>
                         <p>Register</p>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="./login">
+                    <a class="nav-link" href="/login">
                         <i class="nc-icon nc-button-power"></i>
                         <p>Log In</p>
                     </a>

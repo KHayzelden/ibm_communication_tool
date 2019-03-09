@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var app = require('../app.js');
 var bodyParser= require("body-parser");
+var passport = require("passport");
 
 router.get('/', function(req, res, next) {
     var names = [];
@@ -26,7 +27,7 @@ router.get('/search', function(req, res, next) {
     var searchResults = [];
     var bookmarks1a = [];
     var bookmarks2a = [];
-
+    currentUser = req.user;
     var searchJson = [{"searchRTest": ["Result 1"]}, 
                {"searchRTest": ["Result 2"]}, 
                {"searchRTest": ["Result 3"]},
