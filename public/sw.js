@@ -1,7 +1,11 @@
 const staticAssets = [
 	'./',
-	'./stylesheets/style.css'
-
+	'./stylesheets/style.css',
+	'./search',
+	'./account',
+	'./bookmarks',
+	'./search_history',
+	'.settings'
 ];
 
 

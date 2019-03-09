@@ -80,7 +80,7 @@ $('#clearButton').click(function(){
  
 })
 
-clearButton
+//clearButton
 function copyText(butt){
     swal({
             title: "Are you sure?",
