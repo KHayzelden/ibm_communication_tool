@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="appicon" sizes="76x76" href="../assets/img/appicon.png">
+    <link rel="icon" type="image/png" href="../assets/img/icon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title><%= title %></title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    
+    <!-- Fonts and icons -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    
+    <!-- CSS Files -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet" />
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.2/css/mdui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.standalone.css">
+</head>
+<body>
+<div class="sidebar" data-color="blue">
+    <div class="sidebar-wrapper">
+        <div class="logo"> <!-- the users icon? -->
+            <a href="account" class="simple-text"> <!-- link to the profile page -->
+                <% if(loggedIn == true) {
+                %>
+                    <%= name %>
+                <%
+                }
+                else { %>
+                    Welcome
+                <% } %>
+            </a>
+        </div>
+        <ul class="nav">
+            <% if (page_name === 'search') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
+                <a class="nav-link" href="./search">
+                    <i class="nc-icon nc-zoom-split"></i>
+                    <p>Search</p>
+                </a>
+            </li>
+
+            <% if (loggedIn === true) { %>
+                <% if (page_name === 'search_history') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
+                    <a class="nav-link" href="./search_history">
+                        <i class="nc-icon nc-single-copy-04"></i>
+                        <p>History</p>
+                    </a>
+                </li>
+                <% if (page_name === 'bookmarks') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
+                    <a class="nav-link" href="./bookmarks">
+                        <i class="nc-icon nc-tag-content"></i>
+                        <p>Bookmarks</p>
+                    </a>
+                </li>
+                <% if (page_name === 'account') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
+                    <a class="nav-link" href="./account">
+                        <i class="nc-icon nc-circle-09"></i>
+                        <p>Account</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="./login">
+                        <i class="nc-icon nc-button-power"></i>
+                        <p>Log Out</p>
+                    </a>
+                </li>
+                <% if (page_name === 'settings') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
+                    <a class="nav-link" href="./settings">
+                        <i class="nc-icon nc-settings-gear-64"></i>
+                        <p>Settings</p>
+                    </a>
+                </li>
+            <% } 
+            else { %>
+                <li>
+                    <a class="nav-link" href="./register">
+                        <i class="nc-icon nc-circle-09"></i>
+                        <p>Register</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="./login">
+                        <i class="nc-icon nc-button-power"></i>
+                        <p>Log In</p>
+                    </a>
+                </li>
+            <% } %>
+
+            <li class="nav-item active active-pro">
+                <a class="nav-link active" href="./help">
+                    <i class="nc-icon nc-puzzle-10"></i>
+                    <p>Help</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
