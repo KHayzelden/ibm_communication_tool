@@ -83,7 +83,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <div class="stats" href="bookmarks.html">
+                                    <div class="stats" href="bookmarks">
                                         <i class="fa fa-question-circle-o"></i> Select a result to have it voiced for you.
                                     </div>
                                 </div>
@@ -91,54 +91,57 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card ">
-                                <div class="card-header ">
-                                    <h4 class="card-title">Bookmarked Searches</h4>
-                                </div>
-                                <div class="card-body ">
-                                    <div class="card-body table-full-width table-responsive">
-                                        <div class="pre-scrollable">
-                                          <div id="list-example" class="list-group">
-                                            <% for(var i=0; i <= bookmarks1.length; i++) { %>
-                                                <a class="list-group-item  d-flex justify-content-between align-items-center"><%= bookmarks1[i] %></a>
-                                            <% } %>
-                                          </div>
+                    <% if(loggedIn == true) { %>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card ">
+                                    <div class="card-header ">
+                                        <h4 class="card-title">Bookmarked Searches</h4>
+                                    </div>
+                                    <div class="card-body ">
+                                        <div class="card-body table-full-width table-responsive">
+                                            <div class="pre-scrollable">
+                                              <div id="list-example" class="list-group">
+                                                <% for(var i=0; i <= bookmarks1.length; i++) { %>
+                                                    <a class="list-group-item  d-flex justify-content-between align-items-center"><%= bookmarks1[i] %></a>
+                                                <% } %>
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" href="bookmarks">
+                                            <i class="fa fa-question-circle-o"></i> Go to the bookmarks page to add or edit.
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-footer">
-                                    <div class="stats" href="bookmarks.html">
-                                        <i class="fa fa-question-circle-o"></i> Go to the bookmarks page to add or edit.
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card ">
+                                    <div class="card-header ">
+                                        <h4 class="card-title">Bookmarked Searches</h4>
+                                    </div>
+                                    <div class="card-body ">
+                                        <div class="card-body table-full-width table-responsive">
+                                            <div class="pre-scrollable" style="min-width: 100%; height: 100%;">
+                                              <div id="list-example" class="list-group">
+                                                <% for(var i=0; i <= bookmarks2.length; i++) { %>
+                                                    <a class="list-group-item  d-flex justify-content-between align-items-center"><%= bookmarks2[i] %></a>
+                                                <% } %>
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats" href="bookmarks">
+                                            <i class="fa fa-question-circle-o"></i> Go to the bookmarks page to add or edit.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="card ">
-                                <div class="card-header ">
-                                    <h4 class="card-title">Bookmarked Searches</h4>
-                                </div>
-                                <div class="card-body ">
-                                    <div class="card-body table-full-width table-responsive">
-                                        <div class="pre-scrollable" style="min-width: 100%; height: 100%;">
-                                          <div id="list-example" class="list-group">
-                                            <% for(var i=0; i <= bookmarks2.length; i++) { %>
-                                                <a class="list-group-item  d-flex justify-content-between align-items-center"><%= bookmarks2[i] %></a>
-                                            <% } %>
-                                          </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="stats" href="bookmarks.html">
-                                        <i class="fa fa-question-circle-o"></i> Go to the bookmarks page to add or edit.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <% } %>
+
                 </div>
             </div>
         </div>
