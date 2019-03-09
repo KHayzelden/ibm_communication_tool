@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var app = require('../app.js');
 var bodyParser= require("body-parser");
+const flash = require("connect-flash");
 
 router.get('/', function(req, res, next) {
     var names = [];
@@ -102,6 +103,11 @@ router.post('/add_name', function (req, res, next)  {
         doc._id = body.id;
         res.redirect("/");
     });
+});
+
+router.get('/error', function(req, res) {
+    let errorArray = req.flash('error');
+    res.render("error",{title: 'Watson Titter Communication', errorMessage: errorArray[0]});
 });
 
 module.exports = router;
