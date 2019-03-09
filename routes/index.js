@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var app = require('../app.js');
 var bodyParser= require("body-parser");
-const flash = require("connect-flash");
 
 router.get('/', function(req, res, next) {
     var names = [];
@@ -21,7 +20,6 @@ router.get('/', function(req, res, next) {
             res.render('index', {title: 'Watson Twitter Communication', user: names});
         }
     });
-
 });
 
 router.get('/search', function(req, res, next) {
@@ -29,55 +27,131 @@ router.get('/search', function(req, res, next) {
     var bookmarks1a = [];
     var bookmarks2a = [];
 
-    
+    var searchJson = [{"searchRTest": ["Result 1"]}, 
+               {"searchRTest": ["Result 2"]}, 
+               {"searchRTest": ["Result 3"]},
+               {"searchRTest": ["Result 4"]},
+               {"searchRTest": ["Result 5"]},
+               {"searchRTest": ["Result 6"]},
+               {"searchRTest": ["Result 7"]},
+               {"searchRTest": ["Result 8"]},
+               {"searchRTest": ["Result 9"]},
+               {"searchRTest": ["Result 10"]}];
 
-    // var data = '{"searchRTest": "Laborum in proident eu ad laboris incididunt Lorem sit amet ipsum"}';
+    for(var i = 0; i < searchJson.length; i++){
+       var searchArray = searchJson[i].searchRTest;
 
-    // var json = JSON.parse(data);
+       for(var j = 0; j < searchArray.length; j++){
+        searchResults.push(searchArray[j]);
+       
+       }
+    }
 
-    // searchResults.push(json.searchRTest);
+    var bookmarks1Json = [{"bookmarks1": ["Bookmark 1"]}, 
+               {"bookmarks1": ["Bookmark 2"]}, 
+               {"bookmarks1": ["Bookmark 3"]},
+               {"bookmarks1": ["Bookmark 4"]},
+               {"bookmarks1": ["Bookmark 5"]}];
 
-    bookmarks1a.push('Bookmark 1');
-    bookmarks1a.push('Bookmark 2');
-    bookmarks1a.push('Bookmark 3');
-    bookmarks1a.push('Bookmark 4');
-    bookmarks1a.push('Bookmark 5');
+    for(var i = 0; i < bookmarks1Json.length; i++){
+       var books1Array = bookmarks1Json[i].bookmarks1;
 
-    bookmarks2a.push('Bookmark 1');
-    bookmarks2a.push('Bookmark 2');
-    bookmarks2a.push('Bookmark 3');
-    bookmarks2a.push('Bookmark 4');
-    bookmarks2a.push('Bookmark 5');
-    bookmarks2a.push('Bookmark 6');
-    bookmarks2a.push('Bookmark 7');
-    bookmarks2a.push('Bookmark 8');
-    bookmarks2a.push('Bookmark 9');
-    bookmarks2a.push('Bookmark 10');
+       for(var j = 0; j < books1Array.length; j++){
+        bookmarks1a.push(books1Array[j]);
+       
+       }
+    }
+
+    var bookmarks2Json = [{"bookmarks2": ["Bookmark 1"]}, 
+               {"bookmarks2": ["Bookmark 2"]}, 
+               {"bookmarks2": ["Bookmark 3"]},
+               {"bookmarks2": ["Bookmark 4"]},
+               {"bookmarks2": ["Bookmark 5"]},
+               {"bookmarks2": ["Bookmark 6"]},
+               {"bookmarks2": ["Bookmark 7"]},
+               {"bookmarks2": ["Bookmark 8"]},
+               {"bookmarks2": ["Bookmark 9"]},
+               {"bookmarks2": ["Bookmark 10"]}];
+
+    for(var i = 0; i < bookmarks2Json.length; i++){
+       var books2Array = bookmarks2Json[i].bookmarks2;
+
+       for(var j = 0; j < books2Array.length; j++){
+        bookmarks2a.push(books2Array[j]);
+
+       }
+    }
 
     if(!app.db) {
-        res.render('search', {title: 'Watson Twitter Communication', name: 'Test', results: searchResults, bookmarks1: bookmarks1a, bookmarks2: 
-        bookmarks2a});
+        res.render('search', {title: 'Watson Twitter Communication', page_name: 'search', name: 'HSmith', results: searchResults, bookmarks1: bookmarks1a, bookmarks2: 
+        bookmarks2a, loggedIn: true});
         return;
     }
 });
 
-router.get('/search_history', function(req, res, next) {
-    res.render('search_history', {title: 'Watson Twitter Communication', name: 'Test'});
+router.get('/navbar', function(req, res, next) {
+    res.render('navbar', {title: 'Watson Twitter Communication', name: 'HSmith', loggedIn: true});
 
 });
 
-router.get('/account', function(req, res, next) {
-    res.render('account', {title: 'Watson Twitter Communication', name: 'Test'});
+router.get('/search_history', function(req, res, next) {
+    res.render('search_history', {title: 'Watson Twitter Communication', page_name: 'search_history', name: 'HSmith', loggedIn: true});
 
 });
 
 router.get('/bookmarks', function(req, res, next) {
-    res.render('bookmarks', {title: 'Watson Twitter Communication', name: 'Test'});
+    var searched = [];
+    var sentences = [];
+
+    var searchesSaved = [{"searches": ["Bookmarked Search 1"]}, 
+               {"searches": ["Bookmarked Search 2"]}, 
+               {"searches": ["Bookmarked Search 3"]},
+               {"searches": ["Bookmarked Search 4"]},
+               {"searches": ["Bookmarked Search 5"]}];
+
+    for(var i = 0; i < searchesSaved.length; i++){
+       var savedSearches = searchesSaved[i].searches;
+
+       for(var j = 0; j < savedSearches.length; j++){
+        searched.push(savedSearches[j]);
+       
+       }
+    }
+
+    var sentencesSaved = [{"sentence": ["Bookmarked Sentence 1"]}, 
+               {"sentence": ["Bookmarked Sentence 2"]}, 
+               {"sentence": ["Bookmarked Sentence 3"]},
+               {"sentence": ["Bookmarked Sentence 4"]},
+               {"sentence": ["Bookmarked Sentence 5"]},
+               {"sentence": ["Bookmarked Sentence 6"]},
+               {"sentence": ["Bookmarked Sentence 7"]},
+               {"sentence": ["Bookmarked Sentence 8"]},
+               {"sentence": ["Bookmarked Sentence 9"]},
+               {"sentence": ["Bookmarked Sentence 10"]}];
+
+    for(var i = 0; i < sentencesSaved.length; i++){
+       var savedSentences = sentencesSaved[i].sentence;
+
+       for(var j = 0; j < savedSentences.length; j++){
+        sentences.push(savedSentences[j]);
+       
+       }
+    }
+
+    if(!app.db) {
+        res.render('bookmarks', {title: 'Watson Twitter Communication', page_name: 'bookmarks', name: 'HSmith', bookmarkedSearches: searched, bookmarkedSentences: sentences, loggedIn: true});
+        return;
+    }
+
+});
+
+router.get('/account', function(req, res, next) {
+    res.render('account', {title: 'Watson Twitter Communication', page_name: 'account', name: 'HSmith', fname: 'Harry', sname: 'Smith', email: 'hsmith@gmail.com', loggedIn: true});
 
 });
 
 router.get('/settings', function(req, res, next) {
-    res.render('settings', {title: 'Watson Twitter Communication', name: 'Test'});
+    res.render('settings', {title: 'Watson Twitter Communication', page_name: 'settings', name: 'HSmith', loggedIn: true});
 
 });
 
@@ -103,11 +177,6 @@ router.post('/add_name', function (req, res, next)  {
         doc._id = body.id;
         res.redirect("/");
     });
-});
-
-router.get('/error', function(req, res) {
-    let errorArray = req.flash('error');
-    res.render("error",{title: 'Watson Twitter Communication', errorMessage: errorArray[0]});
 });
 
 module.exports = router;
