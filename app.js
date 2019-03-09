@@ -109,6 +109,14 @@ app.use(session({
     saveUninitialized: true
 }));
 
+app.use(function(req, res, next){
+    res.locals.title = 'Watson Twitter Communication';
+    res.locals.currentUser = req.user;
+    res.locals.success = req.flash('success');
+    res.locals.errors = req.flash('error');
+    next();
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -256,13 +264,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 
-app.use(function(req, res, next){
-    res.locals.title = 'Watson Twitter Communication';
-    res.locals.currentUser = req.user;
-    res.locals.success = req.flash('success');
-    res.locals.errors = req.flash('error');
-    next();
-});
 
 // start server on the specified port and binding host
 app.listen(appEnv.port, '0.0.0.0', function() {

@@ -9,11 +9,11 @@
     <title><%= title %></title>
     <link rel="manifest" href="manifest.json">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-    
+
     <!-- Fonts and icons -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
-    
+
     <!-- CSS Files -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet" />
@@ -31,9 +31,9 @@
 <body>
     <div class="wrapper">
         <% include partials/navbar.ejs %>
-        
+
         <div class="main-panel">
-            
+
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class=" container-fluid  ">
@@ -46,12 +46,12 @@
                 </div>
             </nav>
             <!-- End Navbar -->
-            
+
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="card">    
+                            <div class="card">
                                 <div class="card-body" id="searchLarge">
                                     <div class="input-group mb-3">
                                             <input type="text" id = "searchbar" class="form-control" placeholder="Enter phrase to search or speak..." style="border-color:#4091e2; color:#000000;">
@@ -75,25 +75,25 @@
                                                     <i class="fa fa-microphone" style="color: #FFFFFF;"></i> Speak</button>
                                     </div>
                                 </div>
-                                
+
                                 <div class="card-footer"> <!-- make horizontal scroll??-->
                                     <hr>
                                     <p class="card-category">Trending topics:</p>
                                     <div class="tags">
-                                        <a href="">ChainedToTheRhythm</a> 
+                                        <a href="">ChainedToTheRhythm</a>
                                         <a href="">George Lopez</a>
-                                        <a href="">FelizMiercoles</a> 
-                                        <a href="">Tara Palmer-Tomkinson</a> 
-                                        <a href="">Leyla Zana</a> 
-                                        <a href="">ValentinesDay</a> 
-                                        <a href="">LoveBeyondFlags</a> 
+                                        <a href="">FelizMiercoles</a>
+                                        <a href="">Tara Palmer-Tomkinson</a>
+                                        <a href="">Leyla Zana</a>
+                                        <a href="">ValentinesDay</a>
+                                        <a href="">LoveBeyondFlags</a>
                                         <a href="">Whatsapp</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row" id="searchResults" style="display:none;">
                         <div class="col-md-12">
                             <div class="card ">

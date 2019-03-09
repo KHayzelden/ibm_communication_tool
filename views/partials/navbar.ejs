@@ -26,9 +26,9 @@
     <div class="sidebar-wrapper">
         <div class="logo"> <!-- the users icon? -->
             <a href="account" class="simple-text"> <!-- link to the profile page -->
-                <% if(loggedIn == true) {
+                <% if(currentUser) {
                 %>
-                    <%= name %>
+                    <%= currentUser.name %>
                 <%
                 }
                 else { %>
