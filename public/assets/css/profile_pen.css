@@ -234,3 +234,15 @@ svg {
   font-size: 1rem;
   line-height: 1.2;
 }
+
+@media(min-width: 300px) {
+  .stats .box {
+    width: 150px;
+  }
+}
+
+@media(min-width: 1100px) {
+  .stats .box {
+    background-color: #4091e2;
+  }
+}
