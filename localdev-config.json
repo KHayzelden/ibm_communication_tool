@@ -1,0 +1,16 @@
+{
+  "apikey": "bv4TEVPzlAWQmbzYAOXTHtubjuDm9GISqHrM-SiMon97",
+  "appidServiceEndpoint": "https://eu-gb.appid.cloud.ibm.com",
+  "clientId": "160e9834-8ef8-4501-a6c5-07a54d8cb3ce",
+  "discoveryEndpoint": "https://appid-oauth.eu-gb.bluemix.net/oauth/v3/372b84ec-a20d-482d-892e-1f9a5806097d/.well-known/openid-configuration",
+  "iam_apikey_description": "Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:appid:eu-gb:a/00516582016043888f68fb8087953f24:372b84ec-a20d-482d-892e-1f9a5806097d::",
+  "iam_apikey_name": "auto-generated-apikey-160e9834-8ef8-4501-a6c5-07a54d8cb3ce",
+  "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+  "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/00516582016043888f68fb8087953f24::serviceid:ServiceId-6a8455a2-9757-4381-9125-4835e98b3901",
+  "managementUrl": "https://appid-management.eu-gb.bluemix.net/management/v4/372b84ec-a20d-482d-892e-1f9a5806097d",
+  "oauthServerUrl": "https://appid-oauth.eu-gb.bluemix.net/oauth/v3/372b84ec-a20d-482d-892e-1f9a5806097d",
+  "profilesUrl": "https://appid-profiles.eu-gb.bluemix.net",
+  "secret": "M2Y1MTZmMmUtMWUxNy00MGE3LTg2YTQtZWViYjVlMTRmMWVj",
+  "tenantId": "372b84ec-a20d-482d-892e-1f9a5806097d",
+  "version": 3
+}
