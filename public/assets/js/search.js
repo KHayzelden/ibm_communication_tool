@@ -5,16 +5,12 @@ socket.on('show results', (data) =>{
 	var ul = document.getElementById("search_result_li");
 
 	for(var i = 0; i < searchJson.length; i++){
-		var searchArray = searchJson[i].searchRTest;
-
-		for(var j = 0; j < searchArray.length; j++){
-			var li = document.createElement('a');
-			li.appendChild(document.createTextNode(searchArray[j]));
-			li.className = "list-group-item  d-flex justify-content-between align-items-center";
-			ul.appendChild(li);
-		}
+		var sentence = searchJson[i].tweet;
+		var li = document.createElement('a');
+		li.appendChild(document.createTextNode(sentence));
+		li.className = "list-group-item  d-flex justify-content-between align-items-center";
+		ul.appendChild(li);
 	}
-
    document.getElementById('searchResults').style.display = "block";
 }); 
 
