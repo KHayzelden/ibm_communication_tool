@@ -13,7 +13,7 @@
 		"cookie-parser": "^1.4.3",
 		"dotenv": "^4.0.0",
 		"ejs": "^2.6.1",
-		"express": "^4.15.x",
+		"express": "^4.16.4",
 		"express-enforces-ssl": "^1.1.0",
 		"express-session": "^1.15.1",
 		"ibmcloud-appid": "^5.0.0",

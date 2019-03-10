@@ -36,8 +36,6 @@ var path = require('path');
 const CALLBACK_URL = "/ibm/cloud/appid/callback";
 const LOGIN_URL = "/ibm/bluemix/appid/login";
 
-
-
 // load local VCAP configuration  and service credentials
 var vcapLocal;
 try {
@@ -45,11 +43,9 @@ try {
 } catch (e) { }
 
 const appEnvOpts = vcapLocal ? { vcap: vcapLocal} : {};
-
 // get the app environment
 const appEnv = cfenv.getAppEnv(appEnvOpts);
 const isLocal = appEnv.isLocal;
-
 const config = getLocalConfig();
 configureSecurity();
 app.use(flash());

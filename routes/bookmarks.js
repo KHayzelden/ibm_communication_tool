@@ -39,7 +39,7 @@ module.exports = function(router, app){
 	    }
 
 	    if(!app.db) {
-	        res.render('bookmarks', {title: 'Watson Titter Communication', page_name: 'bookmarks', name: 'HSmith', bookmarkedSearches: searched, bookmarkedSentences: sentences, loggedIn: true});
+	        res.render('bookmarks', {title: 'Watson Twitter Communication', page_name: 'bookmarks', name: 'HSmith', bookmarkedSearches: searched, bookmarkedSentences: sentences, loggedIn: true});
 	        return;
 	    }
 

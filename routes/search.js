@@ -1,32 +1,32 @@
-
+const https = require('https');
 module.exports = function(router, app){
-	
 
 	io.on('connection', (socket) => {
 		socket.emit('message');
 		// When the client emits 'search_keywords', this listens and executes
 		socket.on('search keywords', (data) => {
 			console.log("Received keywords!");
-			
-			// call search function here 
-			var searchJson = [{"searchRTest": [data]}, 
-				               {"searchRTest": [data]}, 
-				               {"searchRTest": [data]},
-				               {"searchRTest": [data]},
-				               {"searchRTest": [data]},
-				               {"searchRTest": [data]},
-				               {"searchRTest": [data]},
-				               {"searchRTest": [data]},
-				               {"searchRTest": [data]},
-				               {"searchRTest": [data]}];
+			let search = 'https://watson-twitter-communication.eu-gb.mybluemix.net/search?keyword=' + data.split(' ').join('+');
 
-			socket.emit('show results', {
-				results: searchJson
-			});
+            https.get(search, (resp) => {
+                let result = '';
+                // A chunk of data has been recieved.
+                resp.on('data', (chunk) => {
+                    result += chunk;
+                });
+                // The whole response has been received. Print out the result.
+                resp.on('end', () => {
+                    socket.emit('show results', {
+                        results: JSON.parse(result)
+                    });
+                });
+
+            }).on("error", (err) => {
+                console.log("Error: " + err.message);
+
+            });
 		});
 	});
-
-
 
 	router.get('/search', function(req, res, next) {
 
@@ -73,7 +73,7 @@ module.exports = function(router, app){
 	    }
 
 	 //    if(!app.db) {
-	        res.render('search', {title: 'Watson Titter Communication', page_name: 'search', name: 'HSmith', bookmarks1: bookmarks1a, bookmarks2: 
+	        res.render('search', {title: 'Watson Twitter Communication', page_name: 'search', name: 'HSmith', bookmarks1: bookmarks1a, bookmarks2: 
 	        bookmarks2a, loggedIn: true});
 	        return;
 	 //    }

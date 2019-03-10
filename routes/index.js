@@ -9,7 +9,7 @@ require('./account')(router, app);
 require('./settings')(router, app);
 
 router.get('/navbar', function(req, res, next) {
-    res.render('navbar', {title: 'Watson Titter Communication', name: 'HSmith', loggedIn: true});
+    res.render('navbar', {title: 'Watson Twitter Communication', name: 'HSmith', loggedIn: true});
 
 });
 

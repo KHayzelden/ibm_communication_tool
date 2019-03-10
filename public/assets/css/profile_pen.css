@@ -238,6 +238,7 @@ svg {
 @media(min-width: 300px) {
   .stats .box {
     width: 150px;
+    float: left;
   }
 }
 
