@@ -37,7 +37,7 @@
                                             <input type="text" id = "searchbar" class="form-control" placeholder="Enter phrase to search or speak..." style="border-color:#4091e2; color:#000000;">
                                     </div>
                                     <div class="input-group-append" id="button-addon4">
-                                            <button class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;margin:auto;" onclick="showResults(); return false;">
+                                            <button class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;margin:auto;" onclick="showResults(document.getElementById('searchbar').value); return false;">
                                                     <i class="fa fa-search" style="color: #FFFFFF;"></i>  Search</button>
                                             <button class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;margin:auto;">
                                                     <i class="fa fa-microphone" style="color: #FFFFFF;"></i> Speak</button>
@@ -47,15 +47,7 @@
                                 <div class="card-footer"> <!-- make horizontal scroll??-->
                                     <hr>
                                     <p class="card-category">Trending topics:</p>
-                                    <div class="tags">
-                                        <a href="">ChainedToTheRhythm</a>
-                                        <a href="">George Lopez</a>
-                                        <a href="">FelizMiercoles</a>
-                                        <a href="">Tara Palmer-Tomkinson</a>
-                                        <a href="">Leyla Zana</a>
-                                        <a href="">ValentinesDay</a>
-                                        <a href="">LoveBeyondFlags</a>
-                                        <a href="">Whatsapp</a>
+                                    <div class="tags" id="trending topics">
                                     </div>
                                 </div>
                             </div>

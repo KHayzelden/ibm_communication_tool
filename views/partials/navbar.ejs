@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html>
 <head>
     <meta charset="utf-8" />
     <link rel="appicon" sizes="76x76" href="../assets/img/appicon.png">
@@ -31,16 +29,16 @@
 <div class="sidebar" data-color="blue">
     <div class="sidebar-wrapper">
         <div class="logo"> <!-- the users icon? -->
-            <a href="account" class="simple-text"> <!-- link to the profile page -->
-                <% if(currentUser) {
-                %>
+            <% if(currentUser) {
+            %>
+                <a href="account" class="simple-text"> <!-- link to the profile page -->
                     <%= currentUser.name %>
-                <%
-                }
-                else { %>
-                    Welcome
-                <% } %>
-            </a>
+                </a>
+            <%
+            }
+            else { %>
+                <a class="simple-text">Welcome</a>
+            <% } %>
         </div>
         <ul class="nav">
             <% if (page_name === 'search') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
@@ -107,4 +105,3 @@
     </div>
 </div>
 </body>
-</html>
