@@ -31,6 +31,7 @@
             %>
                 <a href="account" class="simple-text"> <!-- link to the profile page -->
                     <%= currentUser.name %>
+                    <input style="display: none;" value=  '<%= currentUser.email %>'  id = "userEmail">
                 </a>
             <%
             }
@@ -38,7 +39,6 @@
                 <a class="simple-text">Welcome</a>
             <% } %>
          
-            <input style="display: none;" value=  '<%= currentUser.email %>'  id = "userEmail">
         </div>
         <ul class="nav">
             <% if (page_name === 'search') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
