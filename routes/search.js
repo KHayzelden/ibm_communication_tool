@@ -26,6 +26,20 @@ module.exports = function(router, app){
 
             });
 		});
+
+		socket.on('get trending topics', () => {
+			console.log('Received topic request!');
+			// Get trending topics from the database
+
+			
+			var result = ['ChainedToTheRhythm', 'George Lopez', 'FelizMiercoles', 'Tara Palmer-Tomkinson',
+			 'Leyla Zana', 'ValentinesDay', 'LoveBeyondFlags', 'Whatsapp'];
+
+			 socket.emit('show trending topics', {
+			 	trending_topics: result
+			 });
+		});
+
 	});
 
 	router.get('/search', function(req, res, next) {

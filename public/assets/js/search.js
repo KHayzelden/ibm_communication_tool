@@ -25,6 +25,29 @@ socket.on('message', function(data){
     console.log('Connection successful!');
 });
 
+$(window).on('load', function(){
+	socket.emit('get trending topics');
+
+	socket.on('show trending topics', (data) =>{
+		console.log('Get topics!');
+
+		var topics = data.trending_topics;
+		var div = document.getElementById("trending topics");
+
+		for(var i = 0; i < topics.length; i++){
+			var a = document.createElement('a');
+			a.setAttribute("id", "topic");
+			a.appendChild(document.createTextNode(topics[i]));
+			a.onclick = function(){
+				showResults(topics[i]);
+			};
+			div.appendChild(a);
+		}
+	});
+
+})
+
+
 function showResults(keywords) {
    socket.emit('search keywords', keywords);
 }
