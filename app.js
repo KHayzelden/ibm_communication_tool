@@ -27,13 +27,16 @@ var cfenv = require('cfenv');
 
 // create a new express server
 var app = express();
+var server = require('http').createServer(app);
+global.io = require('socket.io').listen(server);
+
 var bodyParser = require('body-parser');
 var path = require('path');
 
 const CALLBACK_URL = "/ibm/cloud/appid/callback";
 const LOGIN_URL = "/ibm/bluemix/appid/login";
 
-var cloudant, useDb;
+
 
 // load local VCAP configuration  and service credentials
 var vcapLocal;
@@ -50,6 +53,7 @@ const isLocal = appEnv.isLocal;
 const config = getLocalConfig();
 configureSecurity();
 app.use(flash());
+
 
 // Load the Cloudant library.
 var Cloudant = require('@cloudant/cloudant');
@@ -249,6 +253,7 @@ app.get("/change_details", passport.authenticate(WebAppStrategy.STRATEGY_NAME, {
     show: WebAppStrategy.CHANGE_DETAILS
 }));
 
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -260,7 +265,7 @@ app.use('/', index);
 
 
 // start server on the specified port and binding host
-app.listen(appEnv.port, '0.0.0.0', function() {
+server.listen(appEnv.port, '0.0.0.0', function() {
   // print a message when the server starts listening
   console.log("server starting on " + appEnv.url);
 });
@@ -302,6 +307,7 @@ function getLocalConfig() {
     if (!isLocal) {
         return {};
     }
+
     // load localdev configuration and service credentials
     var localdev;
     try {
@@ -333,3 +339,5 @@ function configureSecurity() {
         app.use(express_enforces_ssl());
     }
 }
+module.exports = app;
+

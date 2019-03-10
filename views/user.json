@@ -1,0 +1,112 @@
+{
+  "search": [
+    {
+      "_id": "5c8163ff2a1dc633d647d877",
+      "time": "Mon Jun 07 1976 04:51:44 GMT+0100 (British Summer Time)",
+      "term": "laboris incididunt",
+      "response_time": 7,
+      "results": [
+        {
+          "rank": 0,
+          "searchRTest": "Laborum in proident eu ad laboris incididunt Lorem sit amet ipsum.",
+          "spoken": false
+        },
+        {
+          "rank": 1,
+          "searchRTest": "Magna non proident pariatur duis officia labore incididunt aliquip velit consectetur.",
+          "spoken": true
+        },
+        {
+          "rank": 2,
+          "searchRTest": "Dolore labore culpa ullamco laboris ut cupidatat pariatur anim aliquip aute minim.",
+          "spoken": true
+        },
+        {
+          "rank": 3,
+          "searchRTest": "Pariatur velit qui velit occaecat est consequat proident.",
+          "spoken": false
+        },
+        {
+          "rank": 4,
+          "searchRTest": "Et ex elit id exercitation.",
+          "spoken": false
+        },
+        {
+          "rank": 5,
+          "searchRTest": "Velit Lorem sunt aute dolor.",
+          "spoken": true
+        },
+        {
+          "rank": 6,
+          "searchRTest": "Consequat quis magna ipsum labore.",
+          "spoken": true
+        },
+        {
+          "rank": 7,
+          "searchRTest": "Sunt id anim cillum laboris do ex proident laboris.",
+          "spoken": true
+        },
+        {
+          "rank": 8,
+          "searchRTest": "Fugiat aute ex officia ea eiusmod laborum sunt pariatur deserunt.",
+          "spoken": false
+        },
+        {
+          "rank": 9,
+          "searchRTest": "Id ad minim exercitation elit occaecat qui ad deserunt culpa velit velit cupidatat.",
+          "spoken": true
+        },
+        {
+          "rank": 10,
+          "searchRTest": "Minim labore occaecat officia incididunt minim nisi sunt qui ipsum labore excepteur officia qui.",
+          "spoken": true
+        },
+        {
+          "rank": 11,
+          "searchRTest": "Lorem et esse sunt tempor non eu anim veniam proident.",
+          "spoken": true
+        },
+        {
+          "rank": 12,
+          "searchRTest": "Dolor irure Lorem sunt quis non ad.",
+          "spoken": true
+        },
+        {
+          "rank": 13,
+          "searchRTest": "Sunt commodo incididunt duis sunt et.",
+          "spoken": true
+        },
+        {
+          "rank": 14,
+          "searchRTest": "Culpa et anim quis fugiat nisi est voluptate tempor occaecat pariatur est ullamco.",
+          "spoken": true
+        },
+        {
+          "rank": 15,
+          "searchRTest": "Cillum dolor irure aliqua ad magna et in.",
+          "spoken": true
+        },
+        {
+          "rank": 16,
+          "searchRTest": "Enim deserunt nulla cillum sint sit duis occaecat nulla nostrud non irure laborum labore.",
+          "spoken": false
+        },
+        {
+          "rank": 17,
+          "searchRTest": "Voluptate sint proident reprehenderit consequat labore.",
+          "spoken": false
+        },
+        {
+          "rank": 18,
+          "searchRTest": "Minim non non culpa dolore officia tempor ea Lorem incididunt amet occaecat sint culpa.",
+          "spoken": false
+        },
+        {
+          "rank": 19,
+          "searchRTest": "Anim ullamco aute consequat veniam elit ut in adipisicing non non sint ad ex.",
+          "spoken": false
+        }
+      ]
+    }
+  ]
+}

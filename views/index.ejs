@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="stylesheets/style.css">
     <link rel="manifest" href="manifest.json">
-    
 
 </head>
 
@@ -47,6 +46,9 @@
                     <input type="submit" name="submit" value="submit" class="btn btn-default">
                 </div>
             </form>
+            <% users.forEach(function (user) { %>
+                <li><%=user%></li>
+            <%})%>
 
         </td>
     </tr>

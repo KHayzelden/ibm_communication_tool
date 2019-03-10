@@ -1,7 +1,6 @@
 <% include partials/navbar.ejs %>
     <div class="wrapper">
         <div class="main-panel">
-
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class=" container-fluid  ">
@@ -19,13 +18,14 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="card">
+
+                            <div class="card">    
                                 <div class="card-body" id="searchLarge">
                                     <div class="input-group mb-3">
                                             <input type="text" id = "searchbar" class="form-control" placeholder="Enter phrase to search or speak..." style="border-color:#4091e2; color:#000000;">
 
                                             <div class="input-group-append" id="button-addon4">
-                                                    <button class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;" onclick="showResults(); return false;">
+                                                    <button class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;" onclick="showResults(document.getElementById('searchbar').value); return false;">
                                                             <i class="fa fa-search" style="color: #FFFFFF;"></i>  Search</button>
                                                     <button class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;">
                                                             <i class="fa fa-microphone" style="color: #FFFFFF;"></i> Speak</button>
@@ -61,7 +61,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row" id="searchResults" style="display:none;">
                         <div class="col-md-12">
                             <div class="card ">
@@ -74,10 +73,7 @@
                                 <div class="card-body ">
                                     <div class="card-body table-full-width table-responsive">
                                         <div class="pre-scrollable" style="min-width: 100%; height: 100%;">
-                                          <div id="list-example" class="list-group">
-                                            <% for(var i=0; i <= results.length; i++) { %>
-                                               <a class="list-group-item  d-flex justify-content-between align-items-center"><%= results[i] %></a>
-                                            <% } %>
+                                          <div class="list-group" id="search_result_li">
                                           </div>
                                         </div>
                                     </div>
