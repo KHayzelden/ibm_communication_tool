@@ -4,10 +4,11 @@ socket.on('show results', (data) =>{
 	var searchJson = data.results;
 	var ul = document.getElementById("search_result_li");
 
-	while(document.getElementById("result_list") != null){
-	    var item = document.getElementById("result_list");
-	    ul.removeChild(item);
-	}
+	// while(document.getElementById("result_list") != null){
+	//     var item = document.getElementById("result_list");
+	//     ul.removeChild(item);
+	// }
+    ul.innerText = "";
 
 	for(var i = 0; i < searchJson.length; i++){
 		var sentence = searchJson[i].tweet;
@@ -17,6 +18,7 @@ socket.on('show results', (data) =>{
 		li.className = "list-group-item  d-flex justify-content-between align-items-center";
 		ul.appendChild(li);
 	}
+    document.getElementById('card-title').innerText = "Search Results for " + data.keyword;
    document.getElementById('searchResults').style.display = "block";
 }); 
 

@@ -17,13 +17,17 @@ module.exports = function(router, app){
                 // The whole response has been received. Print out the result.
                 resp.on('end', () => {
                     socket.emit('show results', {
-                        results: JSON.parse(result)
+                        results: JSON.parse(result),
+                        keyword: data
                     });
                 });
 
             }).on("error", (err) => {
                 console.log("Error: " + err.message);
-
+                socket.emit('show results', {
+                    results: ["An error occureed, no results received"],
+                    keyword: data
+                });
             });
 		});
 
