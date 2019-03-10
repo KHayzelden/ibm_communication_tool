@@ -17,8 +17,6 @@
 		<script src="../assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
 		<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
 		<script src="../assets/js/demo.js"></script>
-		<script src="../assets/js/search.js"></script>
-		<script src="../assets/js/search_history.js"></script>
 
 	<!--   SEARCH_HISTORY SCRIPTS   -->
 		<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
@@ -76,7 +74,7 @@
 
 	<!--   ACCOUNT SCRIPTS   -->
 		<script type='text/javascript'>
-		$(window).load(function(){
+		$(window).on('load',function(){
 		    $(document).ready(function () {
 		        $(function(){
 		              $("#accountUpdate").on("click",function(){
@@ -102,6 +100,5 @@
 		        });
 		    });
 		});
-
 		</script>
 </html>

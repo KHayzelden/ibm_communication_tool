@@ -33,7 +33,7 @@ global.io = require('socket.io').listen(server);
 var bodyParser = require('body-parser');
 var path = require('path');
 
-const CALLBACK_URL = "/ibm/cloud/appid/callback";
+const CALLBACK_URL = "/ibm/bluemix/appid/callback";
 const LOGIN_URL = "/ibm/bluemix/appid/login";
 
 // load local VCAP configuration  and service credentials

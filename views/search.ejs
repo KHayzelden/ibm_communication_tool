@@ -1,4 +1,19 @@
 <% include partials/navbar.ejs %>
+<% include partials/footer.ejs %>
+<script src="../assets/js/search.js"></script>
+
+<script>
+      if('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js', { scope: '/' })
+          .then(function(registration) {
+                console.log('Service Worker Registered');
+          });
+
+        navigator.serviceWorker.ready.then(function(registration) {
+           console.log('Service Worker Ready');
+        });
+      }
+    </script>
     <div class="wrapper">
         <div class="main-panel">
             <!-- Navbar -->
@@ -47,15 +62,7 @@
                                 <div class="card-footer"> <!-- make horizontal scroll??-->
                                     <hr>
                                     <p class="card-category">Trending topics:</p>
-                                    <div class="tags">
-                                        <a href="">ChainedToTheRhythm</a>
-                                        <a href="">George Lopez</a>
-                                        <a href="">FelizMiercoles</a>
-                                        <a href="">Tara Palmer-Tomkinson</a>
-                                        <a href="">Leyla Zana</a>
-                                        <a href="">ValentinesDay</a>
-                                        <a href="">LoveBeyondFlags</a>
-                                        <a href="">Whatsapp</a>
+                                    <div class="tags" id="trending topics">
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +72,7 @@
                         <div class="col-md-12">
                             <div class="card ">
                                 <div class="card-header ">
-                                    <h4 class="card-title">Search Results</h4>
+                                    <h4 class="card-title" id="card-title"></h4>
                                     <button type="submit" class="closeButton" onclick="closeResults();return false;">
                                         <i class="fa fa-remove" style="color: #FFFFFF;"></i>
                                     </button>
@@ -86,7 +93,25 @@
                             </div>
                         </div>
                     </div>
-
+                    <% if(!currentUser) { %>
+                    <div class="row" id="registerNotify">
+                        <div class="col-md-6" style="margin: 0 auto;">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title" style="text-align: center;"><b>Register an account for additional features</b></h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-body table-full-width table-responsive">
+                                        <p>Registering an account gives you access to...<br><br>
+                                            <b>Bookmarks:</b> The ability to save a search term or a sentence for quick access<br>
+                                            <b>History:</b> A full list of all previous searches and voiced items
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
                     <% if(currentUser) { %>
                         <div class="row">
                             <div class="col-md-6">
@@ -142,4 +167,3 @@
             </div>
         </div>
     </div>
-<% include partials/footer.ejs %>
