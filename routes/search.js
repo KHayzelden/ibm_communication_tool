@@ -16,6 +16,7 @@ module.exports = function(router, app){
                 });
                 // The whole response has been received. Print out the result.
                 resp.on('end', () => {
+                	// document.ElementById('registerNotify').style.display = "none";
                     socket.emit('show results', {
                         results: JSON.parse(result),
                         keyword: data

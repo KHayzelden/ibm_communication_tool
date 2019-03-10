@@ -68,25 +68,6 @@
                             </div>
                         </div>
                     </div>
-                    <% if(!currentUser) { %>
-                    <div class="row">
-                        <div class="col-md-6" style="margin: 0 auto;">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title" style="text-align: center;"><b>Register an account for additional features</b></h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="card-body table-full-width table-responsive">
-                                        <p>Registering an account gives you access to...<br><br>
-                                            <b>Bookmarks:</b> The ability to save a search term or a sentence for quick access<br>
-                                            <b>History:</b> A full list of all previous searches and voiced items
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <% } %>
                     <div class="row" id="searchResults" style="display:none;">
                         <div class="col-md-12">
                             <div class="card ">
@@ -112,7 +93,25 @@
                             </div>
                         </div>
                     </div>
-
+                    <% if(!currentUser) { %>
+                    <div class="row" id="registerNotify">
+                        <div class="col-md-6" style="margin: 0 auto;">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title" style="text-align: center;"><b>Register an account for additional features</b></h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-body table-full-width table-responsive">
+                                        <p>Registering an account gives you access to...<br><br>
+                                            <b>Bookmarks:</b> The ability to save a search term or a sentence for quick access<br>
+                                            <b>History:</b> A full list of all previous searches and voiced items
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
                     <% if(currentUser) { %>
                         <div class="row">
                             <div class="col-md-6">
