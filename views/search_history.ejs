@@ -28,7 +28,7 @@
                                     <input type="text" id = "searchbar" class="form-control" placeholder="Search within history..." style="border-color:#4091e2; color:#000000;">
 
                                     <div class="input-group-append" id="button-addon4">
-                                            <button class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;" onclick="">
+                                            <button class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;" onclick="show_history(document.getElementById('searchbar').value)">
                                                     <i class="fa fa-search" style="color: #FFFFFF;"></i>  Search</button>
                                             <button class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;" id="datepicker">
                                                         <i class="fa fa-calendar" style="color: #FFFFFF;"></i>  Date </button>
@@ -40,65 +40,31 @@
                                     <input type="text" id = "searchbar" class="form-control" placeholder="Search within history..." style="border-color:#4091e2; color:#000000;">
                             </div>
                             <div class="input-group-append" id="button-addon4">
-                                            <button class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;margin:auto;" onclick="">
+                                            <button class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;margin:auto;" onclick="show_history(document.getElementById('searchbar').value)">
                                                     <i class="fa fa-search" style="color: #FFFFFF;"></i>  Search</button>
                                             <button class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;margin:auto;" id="datepicker">
                                                         <i class="fa fa-calendar" style="color: #FFFFFF;"></i>  Date </button>
-                                    </div>
+                            </div>
                         </div>
-                            <div class="col-md-12">
-                                <hr>
-                                  <div class="card card-plain">
-                                    <div class="card-header ">
-                                        <h4 class="card-title" ><B id = "showdate">History</B>
-                                        <button style="float: right;" type="button" id="clearButton" class="btn btn-danger btn-fill">Clear History</button></h4>
-                                        <p class="card-category">Select a previous search to see its results</p>
-                                    </div>
-                                      
-                                    <div class="col-md-12">
-                                        <div class="mdui-panels" mdui-panel="{accordion: true}">
-                                            <li class="mdui-subheader">26 Feb</li>
-                                            <div class="mdui-panel-item">
-                                                <div class="mdui-panel-item-header">First Search</div>
-                                                <div class="mdui-panel-item-body">
-                                                    <ul class="mdui-list-dense">
-                                                        <li class="mdui-list-item mdui-ripple">result 1</li>
-                                                        <li class="mdui-list-item mdui-ripple">result 2</li>
-                                                        <li class="mdui-list-item mdui-ripple">result 3</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <li class="mdui-subheader">28 Feb</li>
-                                            <div class="mdui-panel-item">
-                                                <div class="mdui-panel-item-header">Second Search</div>
-                                                <div class="mdui-panel-item-body">
-                                                    <ul class="mdui-list-dense">
-                                                        <li class="mdui-list-item mdui-ripple">result 1</li>
-                                                        <li class="mdui-list-item mdui-ripple">result 2</li>
-                                                        <li class="mdui-list-item mdui-ripple">result 3</li>
-                                                    </ul>
-                                              </div>
-                                            </div>
-
-                                            <div class="mdui-panel-item">
-                                                <div class="mdui-panel-item-header">Third Search</div>
-                                                <div class="mdui-panel-item-body">
-                                                    <ul class="mdui-list-dense">
-                                                        <li class="mdui-list-item mdui-ripple">result 1</li>
-                                                        <li class="mdui-list-item mdui-ripple">result 2</li>
-                                                        <li class="mdui-list-item mdui-ripple">result 3</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="col-md-12">
+                            <hr>
+                              <div class="card card-plain">
+                                <div class="card-header ">
+                                    <h4 class="card-title" ><B id = "showdate">History</B>
+                                    <button style="float: right;" type="button" id="clearButton" class="btn btn-danger btn-fill">Clear History</button></h4>
+                                    <p class="card-category">Select a previous search to see its results</p>
                                 </div>
-                            </div>       
-                        </div>
+                                  
+                                <div class="col-md-12">
+                                    <div class="mdui-panels" mdui-panel="{accordion: true}" id="history_list">
+                                    </duv>
+                                </div>
+                            </div>
+                        </div>       
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 <% include partials/footer.ejs %>
 
