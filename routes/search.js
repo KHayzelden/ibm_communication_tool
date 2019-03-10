@@ -73,7 +73,7 @@ module.exports = function(router, app){
 	    }
 
 	 //    if(!app.db) {
-	        res.render('search', {title: 'Watson Titter Communication', page_name: 'search', name: 'HSmith', bookmarks1: bookmarks1a, bookmarks2: 
+	        res.render('search', {title: 'Watson Twitter Communication', page_name: 'search', name: 'HSmith', bookmarks1: bookmarks1a, bookmarks2: 
 	        bookmarks2a, loggedIn: true});
 	        return;
 	 //    }
