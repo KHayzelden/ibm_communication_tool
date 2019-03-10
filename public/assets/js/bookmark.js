@@ -80,6 +80,24 @@ $('#clearButton').click(function(){
  
 })
 
+$('#logout').click(function(){
+    swal({
+            title: "Do you want to log out??",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+    .then((willDelete) => {
+            if (willDelete) 
+            {
+                window.location.href = "/logout";
+                swal("Logging out", {
+                icon: "success",
+                });
+            }
+        });
+})
+
 function copyText(butt){
     swal({
             title: "Are you sure?",
