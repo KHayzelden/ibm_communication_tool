@@ -137,6 +137,69 @@ $('#list-example2').click(function(){
     inText($(this), html);
 })
 
+$('#savebookmark1').click(function(){
+   
+    if($("#inputsentence").val() != '')
+    {
+        console.log($("#inputsentence").val());
+
+        var db = new PouchDB('bookmarkSentence');
+        db.post({
+            user: $("#userEmail").val(),
+            sentence: $("#inputsentence").val(), 
+        }, function (err, res) {
+            if (err) {
+            throw new Error(err)
+            }
+            console.log(res)
+        })
+
+        $(".modal-backdrop").remove();
+        $("#addSentence").hide();
+       
+    }
+    else
+    {
+        $("#warninginput1").css("visibility", "visible");
+
+        console.log("null");
+    }
+})
+
+$("#inputsentence").focus(function() {
+    $("#warninginput1").css("visibility", "hidden");
+})
+
+$('#savebookmark2').click(function(){
+   
+    if($("#inputsearch").val() != '')
+    {
+        console.log($("#inputsearch").val());
+        var dbsearch = new PouchDB('bookmarkSearch');
+        dbsearch.post({
+            user: $("#userEmail").val(),
+            sentence: $("#inputsearch").val(), 
+        }, function (err, res) {
+            if (err) {
+            throw new Error(err)
+            }
+            console.log(res)
+        })
+        $(".modal-backdrop").remove();
+        $("#addSearch").hide();
+    }
+    else
+    {
+        $("#warninginput2").css("visibility", "visible");
+
+        console.log("null");
+    }
+})
+
+$("#inputsearch").focus(function() {
+    $("#warninginput2").css("visibility", "hidden");
+})
+
 function inText(butt, html){
     swal("Enter new sentences:", {
         content: "input",
@@ -180,7 +243,7 @@ function bindDrag(source) {
         }
     });
 }
-document.ondragover = function(e){e.preventDefault();}          // 必须设置dragover阻止默认事件
+document.ondragover = function(e){e.preventDefault();}        
 document.ondrop = function(e){e.preventDefault();}
 
 var source = $('.list-group-item');

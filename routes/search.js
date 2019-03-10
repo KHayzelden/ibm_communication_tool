@@ -36,7 +36,6 @@ module.exports = function(router, app){
 	    var bookmarks1a = [];
 	    var bookmarks2a = [];
 
-
 	    var bookmarks1Json = [{"bookmarks1": ["Bookmark 1"]}, 
 	               {"bookmarks1": ["Bookmark 2"]}, 
 	               {"bookmarks1": ["Bookmark 3"]},

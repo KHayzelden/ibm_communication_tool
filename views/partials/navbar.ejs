@@ -18,8 +18,6 @@
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link href="css/book-mobile.css" rel="stylesheet" type="text/css" media="all" />
-    <link type="text/css" rel="stylesheet" href="css/jquery.mmenu.all.css?v=5.4.4" />
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.2/css/mdui.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.standalone.css">
     <link rel="stylesheet" href="../assets/css/profile_pen.css">
@@ -31,7 +29,7 @@
 <div class="sidebar" data-color="blue">
     <div class="sidebar-wrapper">
         <div class="logo"> <!-- the users icon? -->
-            <a href="account" class="simple-text"> <!-- link to the profile page -->
+            <a href="account" class="simple-text" > <!-- link to the profile page -->
                 <% if(currentUser) {
                 %>
                     <%= currentUser.name %>
@@ -41,6 +39,8 @@
                     Welcome
                 <% } %>
             </a>
+         
+            <input style="display: none;" value=  '<%= currentUser.email %>'  id = "userEmail">
         </div>
         <ul class="nav">
             <% if (page_name === 'search') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
