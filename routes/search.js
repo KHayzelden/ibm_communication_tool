@@ -17,7 +17,7 @@ if(isLocal){
     } catch (e) { }
 } else{
     console.log("OAUTH",process.env.OAUTH);
-    oauth = process.env.OAUTH;
+    oauth = process.env["OAUTH"];
 }
 
 
