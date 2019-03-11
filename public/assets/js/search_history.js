@@ -63,3 +63,33 @@ socket.on('message', function(data){
 function show_history(keywords) {
    socket.emit('search history', keywords);
 };
+
+$('#clearButton').click(function(){
+
+    if($(this).html() == "Clear History")
+    {
+        swal({
+            title: "Are you sure?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+    .then((willDelete) => {
+            if (willDelete) 
+            {
+                swal("Successfully Deleted!", {
+                icon: "success",
+                });
+            } else 
+            {
+                swal("Your History is safe!");
+            }
+        });
+    }
+    else if($(this).html() == "Back")
+    {
+        $("#showdate").text("History");
+        $("#clearButton").text("Clear History");
+    }
+ 
+})
