@@ -3,5 +3,4 @@ vcap-local.json
 localdev-config.json
 .idea
 .DS_Store
-oauth.json
 .env
