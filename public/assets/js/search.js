@@ -37,14 +37,21 @@ $(window).on('load', function(){
 		var div = document.getElementById("trending topics");
 
 		for(var i = 0; i < topics.length; i++){
+		    let trend = topics[i].name;
 			var a = document.createElement('a');
-			a.setAttribute("id", "topic");
-			a.appendChild(document.createTextNode(topics[i].name));
-			a.onclick = function(){
-				showResults(topics[i]);
-			};
+			a.setAttribute("id", trend);
+            a.setAttribute("class", "topic");
+			a.appendChild(document.createTextNode(trend));
 			div.appendChild(a);
 		}
+		let trends = document.getElementsByClassName("topic");
+		console.log(trends);
+        for ( var i = 0; i < trends.length; i++ ) (function(i){
+            trends[i].onclick = function() {
+                // do something
+                showResults(trends[i].innerText);
+            }
+        })(i);
 	});
 
 })

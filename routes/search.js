@@ -1,16 +1,33 @@
 const getBearerToken = require('get-twitter-bearer-token');
 const https = require('https');
-const oauth = require("../oauth.json");
-module.exports = function(router, app){
+var cfenv = require('cfenv');
 
+// load local VCAP configuration  and service credentials
+var vcapLocal;
+try {
+    vcapLocal = require('./vcap-local.json');
+} catch (e) { }
+const appEnvOpts = vcapLocal ? { vcap: vcapLocal} : {};
+const appEnv = cfenv.getAppEnv(appEnvOpts);
+const isLocal = appEnv.isLocal;
+var oauth;
+if(isLocal){
+    oauth = require("../oauth.json");
+} else{
+    oauth = appEnv.OAUTH ? appEnv.OAUTH : process.env.OAUTH;
+}
+
+
+module.exports = function(router, app){
 	io.on('connection', (socket) => {
 		socket.emit('message');
 		// When the client emits 'search_keywords', this listens and executes
 		socket.on('search keywords', (data) => {
+		    let keyword = data.replace('#','');
 			console.log("Received keywords!");
-			let search = 'https://watson-twitter-communication.eu-gb.mybluemix.net/search?keyword=' + data.split(' ').join('+');
+			let search = 'https://watson-twitter-communication.eu-gb.mybluemix.net/search?keyword=' + keyword.split(' ').join('+');
 
-            https.get(search, (resp) => {
+            let request = https.get(search, (resp) => {
                 let result = '';
                 // A chunk of data has been recieved.
                 resp.on('data', (chunk) => {
@@ -24,7 +41,8 @@ module.exports = function(router, app){
                     });
                 });
 
-            }).on("error", (err) => {
+            });
+            request.on("error", (err) => {
                 console.log("Error: " + err.message);
                 socket.emit('show results', {
                     results: ["An error occureed, no results received"],
@@ -36,13 +54,15 @@ module.exports = function(router, app){
 		socket.on('get trending topics', () => {
 			console.log('Received topic request!');
 			// Get trending topics from the database
+            var token = "";
             if(oauth.access_token === undefined){
                 getBearerToken(oauth.encoded_consumer_key, oauth.encoded_consumer_secret, (err, res) => {
                     if (err) {
                         console.log(err)
                     } else {
                         // bearer token
-                        console.log(res.body.access_token)
+                        token = res.body.access_token;
+                        // console.log(res.body.access_token);
                     }
                 });
             }
@@ -50,7 +70,7 @@ module.exports = function(router, app){
                 'hostname': 'api.twitter.com',
                 'method': 'GET',
                 'headers': {
-                    'Authorization': 'Bearer ' + oauth.access_token,
+                    'Authorization': 'Bearer ' + oauth.access_token || token,
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 'path': '/1.1/trends/place.json?id=23424975'
@@ -66,12 +86,12 @@ module.exports = function(router, app){
                         trending_topics: filtered
                     });
                 });
-            }).on('error', (err) => {
+            });
+            request.on('error', (err) => {
                 console.log("Error: " + err.message);
             });
             request.end();
 		});
-
 	});
 
 	router.get('/search', function(req, res, next) {
