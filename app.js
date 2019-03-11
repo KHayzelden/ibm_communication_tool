@@ -53,7 +53,6 @@ app.use(flash());
 var Cloudant = require('@cloudant/cloudant');
 
 if (appEnv.services['cloudantNoSQLDB'] || appEnv.getService(/cloudant/)) {
-    console.log('ENV: ', appEnv);
     // Initialize database with credentials
     if (appEnv.services['cloudantNoSQLDB']) {
         // CF service named 'cloudantNoSQLDB'
