@@ -38,12 +38,11 @@
                                 <div class="card-body" id="searchLarge">
                                     <div class="input-group mb-3">
                                             <input type="text" id = "searchbar" class="form-control" placeholder="Enter phrase to search or speak..." style="border-color:#4091e2; color:#000000;">
-
                                             <div class="input-group-append" id="button-addon4">
                                                     <button id="search_btn" class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;" onclick="showResults(document.getElementById('searchbar').value); return false;">
                                                             <i class="fa fa-search" style="color: #FFFFFF;"></i>  Search</button>
-                                                    <button id="speak_btn" class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;">
-                                                            <i class="fa fa-microphone" style="color: #FFFFFF;"></i> Speak</button>
+                                                    <button onclick="voice();" id="speak_btn" class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;">
+                                                            <i onclick="voice();" class="fa fa-microphone" style="color: #FFFFFF;"></i> Speak</button>
                                             </div>
                                     </div>
                                 </div>
@@ -127,11 +126,11 @@
                         <div class="col-md-6" style="margin: 0 auto;">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" style="text-align: center;"><b>Register an account for additional features</b></h4>
+                                    <h4 onclick="informUser()" class="card-title" style="text-align: center;"><b>Register an account for additional features</b></h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="card-body table-full-width table-responsive">
-                                        <p>Registering an account gives you access to...<br><br>
+                                        <p onclick="informUser()">Registering an account gives you access to...<br><br>
                                             <b>Bookmarks:</b> The ability to save a search term or a sentence for quick access<br>
                                             <b>History:</b> A full list of all previous searches and voiced items
                                         </p>
@@ -192,5 +191,16 @@
             </div>
         </div>
     </div>
+
+<script>
+    function voice() {
+        var textToVoice = document.getElementById("searchbar").value;
+        responsiveVoice.speak(textToVoice);
+    }
+
+    function informUser() {
+        responsiveVoice.speak("Register an account for additional features. Registering an account gives you access to bookmarks: the ability to save a search term or a sentence for quick access. And history: a full list of all previous searches and voiced items");
+    }
+</script>
 
 <% include partials/footer.ejs %>

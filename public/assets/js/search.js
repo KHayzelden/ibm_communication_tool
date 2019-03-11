@@ -14,7 +14,7 @@ socket.on('show results', (data) =>{
 		var li = document.createElement('a');
 		li.setAttribute("id", "result_list");
 		li.appendChild(document.createTextNode(sentence));
-		li.className = "list-group-item  d-flex justify-content-between align-items-center";
+		li.className = "list-group-item d-flex justify-content-between align-items-center";
 		ul.appendChild(li);
 	}
     document.getElementById('card-title').innerText = "Search Results for " + data.keyword;
@@ -27,6 +27,14 @@ socket.on('show results', (data) =>{
         trends[i].onclick = function() {
             // do something
             showResults(trends[i].innerText);
+        }
+    })(i);
+
+    let voiceMessage = document.getElementsByClassName("list-group-item d-flex justify-content-between align-items-center");
+    for ( var i = 0; i < voiceMessage.length; i++ ) (function(i){
+        voiceMessage[i].onclick = function() {
+            // do something
+            responsiveVoice.speak(voiceMessage[i].innerText);
         }
     })(i);
 
@@ -60,6 +68,7 @@ $(window).on('load', function(){
             trends[i].onclick = function() {
                 // do something
                 showResults(trends[i].innerText);
+                document.getElementById("searchbar").value = trends[i].innerText;
             }
         })(i);
 	});
@@ -87,4 +96,6 @@ function closeResults() {
    document.getElementById('searchResults').style.display = "none";
 }
 
-
+function voice(message) {
+	responsiveVoice.speak(message);
+}
