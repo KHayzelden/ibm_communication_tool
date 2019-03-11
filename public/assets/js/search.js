@@ -1,13 +1,12 @@
 var socket = io();
 socket.on('show results', (data) =>{
+	if(data == null){
+		return;
+	}
 
 	var searchJson = data.results;
 	var ul = document.getElementById("search_result_li");
 
-	// while(document.getElementById("result_list") != null){
-	//     var item = document.getElementById("result_list");
-	//     ul.removeChild(item);
-	// }
     ul.innerText = "";
 
 	for(var i = 0; i < searchJson.length; i++){
@@ -19,7 +18,18 @@ socket.on('show results', (data) =>{
 		ul.appendChild(li);
 	}
     document.getElementById('card-title').innerText = "Search Results for " + data.keyword;
-   document.getElementById('searchResults').style.display = "block";
+    document.getElementById('loader_container').style.display = 'none';
+    document.getElementById('speak_btn').disabled=false;
+   	document.getElementById('search_btn').disabled=false;
+
+	let trends = document.getElementsByClassName("topic");
+    for ( var i = 0; i < trends.length; i++ ) (function(i){
+        trends[i].onclick = function() {
+            // do something
+            showResults(trends[i].innerText);
+        }
+    })(i);
+
 }); 
 
 
@@ -58,6 +68,18 @@ $(window).on('load', function(){
 
 
 function showResults(keywords) {
+	console.log("Showing results");
+	var ul = document.getElementById("search_result_li");
+    ul.innerText = "";
+	document.getElementById('loader_container').style.display = 'block';
+	document.getElementById('searchResults').style.display = "block";
+	document.getElementById('speak_btn').disabled=true;
+	document.getElementById('search_btn').disabled=true;
+	let trends = document.getElementsByClassName("topic");
+    for ( var i = 0; i < trends.length; i++ ) (function(i){
+	    trends[i].onclick = null;
+    })(i);
+
    socket.emit('search keywords', keywords);
 }
 

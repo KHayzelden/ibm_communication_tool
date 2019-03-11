@@ -34,6 +34,7 @@ module.exports = function(router, app){
                     result += chunk;
                 });
                 // The whole response has been received. Print out the result.
+
                 resp.on('end', () => {
                     socket.emit('show results', {
                         results: JSON.parse(result),

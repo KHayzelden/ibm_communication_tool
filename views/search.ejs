@@ -40,9 +40,9 @@
                                             <input type="text" id = "searchbar" class="form-control" placeholder="Enter phrase to search or speak..." style="border-color:#4091e2; color:#000000;">
 
                                             <div class="input-group-append" id="button-addon4">
-                                                    <button class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;" onclick="showResults(document.getElementById('searchbar').value); return false;">
+                                                    <button id="search_btn" class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;" onclick="showResults(document.getElementById('searchbar').value); return false;">
                                                             <i class="fa fa-search" style="color: #FFFFFF;"></i>  Search</button>
-                                                    <button class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;">
+                                                    <button id="speak_btn" class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;">
                                                             <i class="fa fa-microphone" style="color: #FFFFFF;"></i> Speak</button>
                                             </div>
                                     </div>
@@ -52,9 +52,9 @@
                                             <input type="text" id = "searchbar" class="form-control" placeholder="Enter phrase to search or speak..." style="border-color:#4091e2; color:#000000;">
                                     </div>
                                     <div class="input-group-append" id="button-addon4">
-                                            <button class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;margin:auto;" onclick="showResults(document.getElementById('searchbar').value); return false;">
+                                            <button id="search_btn" class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;margin:auto;" onclick="showResults(document.getElementById('searchbar').value); return false;">
                                                     <i class="fa fa-search" style="color: #FFFFFF;"></i>  Search</button>
-                                            <button class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;margin:auto;">
+                                            <button id="speak_btn" class="btn btn-outline-info" type="submit" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;margin:auto;">
                                                     <i class="fa fa-microphone" style="color: #FFFFFF;"></i> Speak</button>
                                     </div>
                                 </div>
@@ -68,6 +68,32 @@
                             </div>
                         </div>
                     </div>
+
+                    <style>
+                        .loader {
+                          position: relative;
+                          left:45%;
+                          border: 10px solid #f3f3f3;
+                          border-radius: 50%;
+                          border-top: 5px solid #3498db;
+                          width: 80px;
+                          height: 80px;
+                          -webkit-animation: spin 2s linear infinite; /* Safari */
+                          animation: spin 2s linear infinite;
+                        }
+
+                        /* Safari */
+                        @-webkit-keyframes spin {
+                          0% { -webkit-transform: rotate(0deg); }
+                          100% { -webkit-transform: rotate(360deg); }
+                        }
+
+                        @keyframes spin {
+                          0% { transform: rotate(0deg); }
+                          100% { transform: rotate(360deg); }
+                        }
+                    </style>
+
                     <div class="row" id="searchResults" style="display:none;">
                         <div class="col-md-12">
                             <div class="card ">
@@ -78,8 +104,11 @@
                                     </button>
                                 </div>
                                 <div class="card-body ">
-                                    <div class="card-body table-full-width table-responsive">
+                                    <div class="card-body table-full-idth table-responsive">
                                         <div class="pre-scrollable" style="min-width: 100%; height: 100%;">
+                                        <div class="row" id="loader_container">
+                                            <div class="loader"></div>
+                                        </div>
                                           <div class="list-group" id="search_result_li">
                                           </div>
                                         </div>
