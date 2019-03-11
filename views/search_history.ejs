@@ -1,6 +1,5 @@
 <% include partials/navbar.ejs %>
-<% include partials/footer.ejs %>
-<script src="../assets/js/search_history.js"></script>
+
 
     <div class="wrapper">
         <div class="main-panel">
@@ -54,7 +53,7 @@
                               <div class="card card-plain">
                                 <div class="card-header ">
                                     <h4 class="card-title" ><B id = "showdate">History</B>
-                                    <button style="float: right;" type="button" id="clearButton" class="btn btn-danger btn-fill">Clear History</button></h4>
+                                    <button style="float: right;" type="button" id="clearButton"  class="btn btn-danger btn-fill">Clear History</button></h4>
                                     <p class="card-category">Select a previous search to see its results</p>
                                 </div>
                                   
@@ -69,4 +68,5 @@
             </div>
         </div>
     </div>
-
+<script src="../assets/js/search_history.js"></script>
+<% include partials/footer.ejs %>

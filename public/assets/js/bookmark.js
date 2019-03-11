@@ -3,7 +3,8 @@ $("#editbutton").click(function(){
     if($(this).html() == "Edit")
     {
         $("#editbutton").text("Cancel");
-        $("#saveButton").attr("style","display:inline-block");
+        //$("#saveButton").attr("style","display:inline-block");
+        $("#addbutton").attr("style","display:none"); 
         $("#editCaption").attr("style","display:block");
         $("#deleteButton").attr("style","display:inline-block");
         $(".input").attr("style","display:inline-block");
@@ -11,7 +12,8 @@ $("#editbutton").click(function(){
     else if($(this).html() == "Cancel")
     {
         $("#editbutton").text("Edit");
-        $("#saveButton").attr("style","display:none");
+        //$("#saveButton").attr("style","display:none");
+        $("#addbutton").attr("style","display:inline-block"); 
         $("#editCaption").attr("style","display:none");
         $("#deleteButton").attr("style","display:none");
         $(".input").attr("style","display:none");
@@ -23,8 +25,10 @@ $("#editbutton1").click(function(){
     console.log($(this).html());
     if($(this).html() == "Edit")
     {
+        
         $("#editbutton1").text("Cancel")       
-        $("#saveButton1").attr("style","display:inline-block");
+        $("#addbutton1").attr("style","display:none"); 
+        //$("#saveButton1").attr("style","display:inline-block");
         $("#editCaption1").attr("style","display:block");
         $("#deleteButton1").attr("style","display:inline-block");
         $(".input1").attr("style","display:inline-block");
@@ -32,7 +36,8 @@ $("#editbutton1").click(function(){
     else if($(this).html() == "Cancel")
     {
         $("#editbutton1").text("Edit");
-        $("#saveButton1").attr("style","display:none");
+        $("#addbutton1").attr("style","display:inline-block");
+        //$("#saveButton1").attr("style","display:none");
         $("#editCaption1").attr("style","display:none");
         $("#deleteButton1").attr("style","display:none");
         $(".input1").attr("style","display:none");
@@ -75,15 +80,18 @@ function copyText(butt){
 }
 
 /* update content */
-/*$('#list-sentences').click(function(){
+$('#list-sentences').click(function(){
     var html = '<span class="input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>';
     inText($(this), html);
 })
 
-$('#list-searches').click(function(){
-    var html = '<span class="input1 input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>';
-    inText($(this), html);
-})*/
+$('#list-searches').on("click", "a", function(){
+    //var html = '<span class="input1 input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>';
+    //inText($(this), html);
+    
+    console.log("Clicked on " + this.id);
+    inText(this.id, this.rev);
+})
 
 
 var db = new PouchDB('ibm-communication');  //create the database
@@ -99,10 +107,11 @@ db.changes({
     } else {
         if(change.doc.type == 'sentence')
         {
+            console.log(change.doc._rev);
             var HTMLString = 
             '<a id="' + change.doc._id + '" rev="' + change.doc._rev + '" class="list-group-item' +
             ' d-flex justify-content-between align-items-center draggable="true" " href="#list-item-1">' +
-                change.doc.sentence + 
+                change.doc.term + 
                 '<span class="input1" style = "display:none">' +
                     '<div class="form-check">' + 
                         '<label class="form-check-label">' + 
@@ -119,7 +128,7 @@ db.changes({
             var HTMLString = 
             '<a id="' + change.doc._id + '" rev="' + change.doc._rev + '" class="list-group-item' +
             ' d-flex justify-content-between align-items-center draggable="true" " href="#list-item-1">' +
-                change.doc.sentence + 
+                change.doc.term + 
                 '<span class="input" style = "display:none">' +
                     '<div class="form-check">' + 
                         '<label class="form-check-label">' + 
@@ -140,7 +149,7 @@ $('#savebookmark1').click(function(){
     {
         db.post({
             user: $("#userEmail").val(),
-            sentence: $("#inputsentence").val(), 
+            term: $("#inputsentence").val(), 
             type: 'sentence',
         }, function (err, res) {
             if (err) {
@@ -166,7 +175,7 @@ $('#savebookmark2').click(function(){
     {
         db.post({
             user: $("#userEmail").val(),
-            sentence: $("#inputsearch").val(), 
+            term: $("#inputsearch").val(), 
             type: 'search',
         }, function (err, res) {
             if (err) {
@@ -187,7 +196,7 @@ $("#inputsearch").focus(function() {
 })
 
 /* Update content */
-function inText(butt, html){
+function inText(getId, rev){
     swal("Enter what you want to update:", {
         content: "input",
         buttons: true,
@@ -196,10 +205,36 @@ function inText(butt, html){
       .then((value) => {
         if(value)
         {
-            html = '<a class="list-group-item  d-flex justify-content-between align-items-center draggable="true"" href="#list-item-1">' + value + html;
+            console.log(value);
+           /* db.put({
+                _id:  getId,
+                user: $("#userEmail").val(),
+                _rev: rev,
+                search: value, 
+                type: 'search',
+            }, function (err, res) {
+                if (err) {
+                throw new Error(err)
+                }
+            })*/
+
+            db.get(getId).then(function(doc) {
+                return db.put({
+                  _id:  getId,
+                  user: $("#userEmail").val(),
+                  _rev: rev,
+                  term: value,
+                  type: 'search',
+                });
+              }).then(function(response) {
+                // handle response
+              }).catch(function (err) {
+                console.log(err);
+              });
+            /*html = '<a class="list-group-item  d-flex justify-content-between align-items-center draggable="true"" href="#list-item-1">' + value + html;
             var source = $( html );
             bindDrag(source);
-            source.appendTo( butt.parent().prev() ); 
+            source.appendTo( butt.parent().prev() ); */
             swal("Successfully Added");
         }
       });
@@ -254,32 +289,4 @@ $('#logout').click(function(){
 })
 
 
-/* clear history function */
-$('#clearButton').click(function(){
 
-    if($(this).html() == "Clear History")
-    {
-        swal({
-            title: "Are you sure?",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-    .then((willDelete) => {
-            if (willDelete) 
-            {
-                swal("Successfully Deleted!", {
-                icon: "success",
-                });
-            } else 
-            {
-                swal("Your History is safe!");
-            }
-        });
-    }
-    else if($(this).html() == "Back")
-    {
-        $("#showdate").text("History");
-        $("#clearButton").text("Clear History");
-    }
-})

@@ -1,4 +1,4 @@
- var socket = io();
+var socket = io();
 socket.on('show history', (data) =>{
 	var searchJson = data.results;
 	refresh_history_list(searchJson);
@@ -64,8 +64,9 @@ function show_history(keywords) {
    socket.emit('search history', keywords);
 };
 
+/* clear history function */
 $('#clearButton').click(function(){
-
+	console.log("work");
     if($(this).html() == "Clear History")
     {
         swal({
@@ -91,5 +92,4 @@ $('#clearButton').click(function(){
         $("#showdate").text("History");
         $("#clearButton").text("Clear History");
     }
- 
 })
