@@ -1,5 +1,12 @@
+const passport = require('passport');
+const appID = require("ibmcloud-appid");
+
+const WebAppStrategy = appID.WebAppStrategy;
+const userProfileManager = appID.UserProfileManager;
+const UnauthorizedException = appID.UnauthorizedException;
+
 module.exports = function(router, app){
-	router.get('/bookmarks', function(req, res, next) {
+	router.get('/bookmarks', passport.authenticate(WebAppStrategy.STRATEGY_NAME), function(req, res, next) {
 	    var searched = [];
 	    var sentences = [];
 

@@ -13,4 +13,9 @@ router.get('/navbar', function(req, res, next) {
 
 });
 
+router.get('/', function(req, res, next) {
+    res.redirect('/search')
+
+});
+
 module.exports = router;

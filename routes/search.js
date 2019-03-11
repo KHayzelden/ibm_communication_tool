@@ -1,21 +1,13 @@
 const getBearerToken = require('get-twitter-bearer-token');
 const https = require('https');
 var cfenv = require('cfenv');
-
-// load local VCAP configuration  and service credentials
-var vcapLocal;
-try {
-    vcapLocal = require('./vcap-local.json');
-} catch (e) { }
-const appEnvOpts = vcapLocal ? { vcap: vcapLocal} : {};
-const appEnv = cfenv.getAppEnv(appEnvOpts);
-const isLocal = appEnv.isLocal;
 var oauth;
-if(isLocal){
-    oauth = require("../oauth.json");
-} else{
-    oauth = appEnv.OAUTH ? appEnv.OAUTH : process.env.OAUTH;
-}
+
+try {
+    oauth = require("../env_custom.json").OAUTH;
+} catch (e) {
+    console.log(e)}
+
 
 
 module.exports = function(router, app){
