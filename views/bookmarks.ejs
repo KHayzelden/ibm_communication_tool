@@ -116,13 +116,15 @@
                                     <form>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">New sentence to bookmark:</label>
-                                            <input type="email" class="form-control" placeholder="...">
+                                            <input type="email" class="form-control"   id = "inputsentence" placeholder="...">
                                         </div>
                                     </form>
+                                    <a style="color: red; visibility:hidden" id = "warninginput1" >Cannot be empty input!</a>
                                 </div>
+
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-link btn-simple" data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-link btn-simple" data-dismiss="modal">Save</button>
+                                    <button type="button" class="btn btn-link btn-simple" id = "savebookmark1">Save</button>
                                 </div>
                             </div>
                         </div>
@@ -142,13 +144,14 @@
                                     <form>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">New search term to bookmark:</label>
-                                            <input type="email" class="form-control" placeholder="...">
+                                            <input type="email" class="form-control" id = "inputsearch" placeholder="...">
                                         </div>
+                                        <a style="color: red; visibility:hidden" id = "warninginput2" >Cannot be empty input!</a>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-link btn-simple" data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-link btn-simple" data-dismiss="modal">Save</button>
+                                    <button type="button" class="btn btn-link btn-simple" id = "savebookmark2">Save</button>
                                 </div>
                             </div>
                         </div>
