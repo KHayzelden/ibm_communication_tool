@@ -32,6 +32,11 @@ body {
   overflow: hidden;
 }
 
+#profileWrap {
+  background-color: white; 
+  height: 272px;
+}
+
 .profile {
   float: left;
   width: 200px;
