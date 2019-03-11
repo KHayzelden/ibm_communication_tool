@@ -16,7 +16,8 @@ if(isLocal){
         oauth = require("../env_custom.json").OAUTH;
     } catch (e) { }
 } else{
-    console.log("OAUTH",process.env.OAUTH);
+    console.log("ENV",process.env);
+    console.log("ENV OAUTH",process.env["OAUTH"]);
     oauth = process.env["OAUTH"];
 }
 
