@@ -29,7 +29,7 @@
         <div class="logo"> <!-- the users icon? -->
             <% if(currentUser) {
             %>
-                <a href="account" class="simple-text"> <!-- link to the profile page -->
+                <a href="account" class="simple-text" > <!-- link to the profile page -->
                     <%= currentUser.name %>
                     <input style="display: none;" value=  '<%= currentUser.email %>'  id = "userEmail">
                 </a>
