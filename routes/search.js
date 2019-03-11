@@ -12,9 +12,12 @@ const appEnv = cfenv.getAppEnv(appEnvOpts);
 const isLocal = appEnv.isLocal;
 var oauth;
 if(isLocal){
-    oauth = require("../oauth.json");
+    try {
+        oauth = require("../env_custom.json").OAUTH;
+    } catch (e) { }
 } else{
-    oauth = appEnv.OAUTH ? appEnv.OAUTH : process.env.OAUTH;
+    console.log(process.env)
+    oauth = process.env.OAUTH;
 }
 
 
