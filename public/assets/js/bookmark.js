@@ -121,7 +121,13 @@ db.changes({
                     '</div>' +
                 '</span>' +
             '</a>';
+
+            var HTMLString1 = '<a id="' + change.doc._id + '" rev="' + change.doc._rev + '"class="list-group-item' +  'd-flex justify-content-between align-items-center" >' +change.doc.term+  '</a>'
+            console.log(HTMLString);
+            console.log(HTMLString1);
             $('#list-sentences').append($.parseHTML(HTMLString));
+            $('#list-sentences1').append($.parseHTML(HTMLString));
+
         }
         else if(change.doc.type == 'search')
         {
@@ -139,6 +145,7 @@ db.changes({
                 '</span>' +
             '</a>';
             $('#list-searches').append($.parseHTML(HTMLString));
+            $('#list-searches1').append($.parseHTML(HTMLString));
         }
     }
 });

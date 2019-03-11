@@ -1,5 +1,5 @@
 <% include partials/navbar.ejs %>
-<% include partials/footer.ejs %>
+
 <script src="../assets/js/search.js"></script>
 
 <script>
@@ -151,10 +151,8 @@
                                     <div class="card-body ">
                                         <div class="card-body table-full-width table-responsive">
                                             <div class="pre-scrollable">
-                                              <div id="list-example" class="list-group">
-                                                <% for(var i=0; i <= bookmarks1.length; i++) { %>
-                                                    <a class="list-group-item  d-flex justify-content-between align-items-center"><%= bookmarks1[i] %></a>
-                                                <% } %>
+                                              <div id="list-searches1" class="list-group">
+                                            
                                               </div>
                                             </div>
                                         </div>
@@ -174,10 +172,8 @@
                                     <div class="card-body ">
                                         <div class="card-body table-full-width table-responsive">
                                             <div class="pre-scrollable" style="min-width: 100%; height: 100%;">
-                                              <div id="list-example" class="list-group">
-                                                <% for(var i=0; i <= bookmarks2.length; i++) { %>
-                                                    <a class="list-group-item  d-flex justify-content-between align-items-center"><%= bookmarks2[i] %></a>
-                                                <% } %>
+                                              <div id="list-sentences1" class="list-group">
+                                           
                                               </div>
                                             </div>
                                         </div>
@@ -196,3 +192,5 @@
             </div>
         </div>
     </div>
+
+<% include partials/footer.ejs %>

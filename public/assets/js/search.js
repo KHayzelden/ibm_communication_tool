@@ -86,3 +86,5 @@ function showResults(keywords) {
 function closeResults() {
    document.getElementById('searchResults').style.display = "none";
 }
+
+
