@@ -32,7 +32,6 @@ global.io = require('socket.io').listen(server);
 
 var bodyParser = require('body-parser');
 var path = require('path');
-
 const CALLBACK_URL = "/ibm/bluemix/appid/callback";
 const LOGIN_URL = "/ibm/bluemix/appid/login";
 
@@ -49,7 +48,6 @@ const isLocal = appEnv.isLocal;
 const config = getLocalConfig();
 configureSecurity();
 app.use(flash());
-
 
 // Load the Cloudant library.
 var Cloudant = require('@cloudant/cloudant');

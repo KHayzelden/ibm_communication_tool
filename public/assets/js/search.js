@@ -39,7 +39,7 @@ $(window).on('load', function(){
 		for(var i = 0; i < topics.length; i++){
 			var a = document.createElement('a');
 			a.setAttribute("id", "topic");
-			a.appendChild(document.createTextNode(topics[i]));
+			a.appendChild(document.createTextNode(topics[i].name));
 			a.onclick = function(){
 				showResults(topics[i]);
 			};
