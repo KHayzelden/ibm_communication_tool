@@ -74,7 +74,7 @@ module.exports = function(router, app){
                 res.on('end', () => {
                     var filtered = JSON.parse(result)[0].trends.filter(trend => trend.tweet_volume !== null);
                     socket.emit('show trending topics', {
-                        trending_topics: filtered
+                        trending_topics: filtered.slice(0,11)
                     });
                 });
             });

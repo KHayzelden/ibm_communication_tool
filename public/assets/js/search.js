@@ -11,7 +11,7 @@ socket.on('show results', (data) =>{
 	ul.innerText = "";
 
 	for(var i = 0; i < searchJson.length; i++){
-		var sentence = searchJson[i].tweet;
+		var sentence = decodeURI(searchJson[i].tweet);
 		var li = document.createElement('a');
 		li.setAttribute("id", "result_list");
 		li.appendChild(document.createTextNode(sentence));

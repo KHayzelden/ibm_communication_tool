@@ -19,7 +19,7 @@ function refresh_history_list(needRefresh, data){
 			var result = data[i].result;
 
 			var li = document.createElement('li');
-			li.className = "mdui-subheader"
+			li.className = "mdui-subheader";
 			li.appendChild(document.createTextNode(simple_time));
 			li.setAttribute("id", keyword);
 
@@ -33,7 +33,7 @@ function refresh_history_list(needRefresh, data){
 			div.appendChild(div2);
 
 			var div3 = document.createElement('div');
-			div3.className = "mdui-panel-item-body"
+			div3.className = "mdui-panel-item-body";
 			var ul = document.createElement('ul');
 			ul.className = "mdui-list-dense";
 			div3.appendChild(ul);
@@ -61,7 +61,7 @@ function refresh_history_list(needRefresh, data){
 
 	}
 	
-};
+}
 
 
 function show_history(keywords) {
@@ -71,7 +71,7 @@ function show_history(keywords) {
 			var history = [];
 
 			for(var i = 0; i < docs.length; i++){
-				if(docs[i].doc.type == 'history'){
+				if(docs[i].doc.type === 'history'){
 					history.push(docs[i].doc);
 				}
 			}
@@ -80,6 +80,6 @@ function show_history(keywords) {
 	}else{
 		refresh_history_list(false ,keywords);
 	}
-};
+}
 
 
