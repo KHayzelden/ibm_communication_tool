@@ -1,24 +1,23 @@
 var socket = io();
 
 socket.on('show results', (data) =>{
- if(data == null){
-  return;
- }
+	if(data == null){
+	return;
+	}
+	var searchJson = data.results;
+	var ul = document.getElementById("search_result_li");
+	push_to_db(data, searchJson);
 
- var searchJson = data.results;
- var ul = document.getElementById("search_result_li");
- push_to_db(data, searchJson);
+	ul.innerText = "";
 
-    ul.innerText = "";
-
- for(var i = 0; i < searchJson.length; i++){
-  var sentence = searchJson[i].tweet;
-  var li = document.createElement('a');
-  li.setAttribute("id", "result_list");
-  li.appendChild(document.createTextNode(sentence));
-  li.className = "list-group-item d-flex justify-content-between align-items-center";
-  ul.appendChild(li);
- }
+	for(var i = 0; i < searchJson.length; i++){
+		var sentence = searchJson[i].tweet;
+		var li = document.createElement('a');
+		li.setAttribute("id", "result_list");
+		li.appendChild(document.createTextNode(sentence));
+		li.className = "list-group-item d-flex justify-content-between align-items-center";
+		ul.appendChild(li);
+	}
     document.getElementById('card-title').innerText = "Search Results for " + data.keyword;
     document.getElementById('loader_container').style.display = 'none';
     document.getElementById('speak_btn').disabled=false;
@@ -79,20 +78,23 @@ $(window).on('load', function(){
 })
 
 function push_to_db(data, searchJson){
- var user = $("#userEmail").val();
- if(user == null){
-  return;
- }
- db.post({
-   user: user,
-   keywords: data.keyword,
-   type: 'history',
-   result: searchJson
- }, function (err, res) {
-  if (err) {
-     throw new Error(err)
-    }
- });
+	 var user = $("#userEmail").val();
+	 var time = Date.now();
+
+	 if(user == null){
+	  return;
+	 }
+	 db.post({
+	   user: user,
+	   keywords: data.keyword,
+	   type: 'history',
+	   time: time,
+	   result: searchJson
+	 }, function (err, res) {
+	  if (err) {
+	     throw new Error(err)
+	    }
+	 });
 }
 
 function showResults(keywords) {

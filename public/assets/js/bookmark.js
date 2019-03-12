@@ -2,7 +2,7 @@ var isEditSearch = false;
 var isEditSentence = false;
 
 $("#editbutton").click(function(){
-    console.log($(this).html());
+    
     if($(this).html() == "Edit")
     {
         $("#editbutton").text("Cancel");
@@ -19,6 +19,7 @@ $("#editbutton").click(function(){
         $("#editCaption").attr("style","display:none");
         $("#deleteButton").attr("style","display:none");
         $(".input").attr("style","display:none");
+        isCheck($(this));
         isEditSearch = false;
     } 
 });
@@ -27,7 +28,6 @@ $("#editbutton1").click(function(){
 
     if($(this).html() == "Edit")
     {
-        
         $("#editbutton1").text("Cancel")       
         $("#addbutton1").attr("style","display:none"); 
         $("#editCaption1").attr("style","display:block");
@@ -42,16 +42,51 @@ $("#editbutton1").click(function(){
         $("#editCaption1").attr("style","display:none");
         $("#deleteButton1").attr("style","display:none");
         $(".input1").attr("style","display:none");
+      
+        isCheck($(this));
         isEditSentence = false;
     }     
 });
 
+function isCheck(butt){
+    butt.parent().next().children().children().each(function(){
+            
+        if($(this).find(":checked").length){
+            $(this).find(":checked").prop( "checked", false);
+        }
+    });
+}
+
+function isSelect(butt){
+    var value = false;
+    butt.parent().next().children().children().each(function(){
+        if($(this).find(":checked").length){ 
+              value = true;
+        }
+    });
+    return value;   
+}
+
 $('#deleteButton').click(function(){
-    copyText($(this));
+    if(isSelect($(this))){
+        copyText($(this));
+    }
+    else{
+        swal({
+            text: "Please select an term",
+        });
+    }
 })
         
 $('#deleteButton1').click(function(){
-    copyText($(this));
+    if(isSelect($(this))){
+        copyText($(this));
+    }
+    else{
+        swal({
+            text: "Please select an term",
+        });
+    }
 })
   
 /* delete the item */
