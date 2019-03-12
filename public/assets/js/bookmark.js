@@ -95,7 +95,6 @@ $('#list-searches').on("click", "a", function(){
     }
 })
 
-
 var db = new PouchDB('ibm-communication');  //create the database
 db.changes({ 
     live: true,

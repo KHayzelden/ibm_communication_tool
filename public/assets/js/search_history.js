@@ -4,9 +4,12 @@ socket.on('show history', (data) =>{
 	refresh_history_list(searchJson);
 }); 
 
-// $( window ).load(function() {
-// 	// new the history list
-// });
+$(window).load(function() {
+	// new the history list
+});
+
+
+
 
 
 function refresh_history_list(data){

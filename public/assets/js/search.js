@@ -1,4 +1,5 @@
 var socket = io();
+
 socket.on('show results', (data) =>{
 	if(data == null){
 		return;
@@ -6,6 +7,7 @@ socket.on('show results', (data) =>{
 
 	var searchJson = data.results;
 	var ul = document.getElementById("search_result_li");
+	push_to_db(data, searchJson);
 
     ul.innerText = "";
 
@@ -38,7 +40,7 @@ socket.on('show results', (data) =>{
         }
     })(i);
 
-}); 
+});
 
 
 socket.on('message', function(data){
@@ -75,6 +77,22 @@ $(window).on('load', function(){
 
 })
 
+function push_to_db(data, searchJson){
+	var user = $("#userEmail").val();
+	if(user == null){
+		return;
+	}
+	db.post({
+	  user: user,
+	  keywords: data.keyword, 
+	  type: 'history',
+	  result: searchJson
+	}, function (err, res) {
+		if (err) {
+		   throw new Error(err)
+		  }
+	});
+}
 
 function showResults(keywords) {
 	console.log("Showing results");

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var app = require('../app.js');
 var bodyParser= require("body-parser");
+
 require('./search')(router, app);
 require('./search_history')(router, app);
 require('./bookmarks')(router, app);

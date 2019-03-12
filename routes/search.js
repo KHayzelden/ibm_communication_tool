@@ -8,8 +8,6 @@ try {
 } catch (e) {
     console.log(e)}
 
-
-
 module.exports = function(router, app){
 	io.on('connection', (socket) => {
 		socket.emit('message');
