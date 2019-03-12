@@ -193,6 +193,8 @@ $("#inputsearch").focus(function() {
     $("#warninginput2").css("visibility", "hidden");
 })
 
+
+        
 /* Update content */
 function inText(getId, rev, text,type){
     swal("Enter what you want to update:", {
@@ -257,24 +259,6 @@ source.each(function(){
     bindDrag($(this));
 });
 
-/* log out jump function*/
-$('#logout').click(function(){
-    swal({
-            title: "Do you want to log out??",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-    .then((willDelete) => {
-            if (willDelete) 
-            {
-                window.location.href = "/logout";
-                swal("Logging out", {
-                icon: "success",
-                });
-            }
-        });
-})
 
 
 
