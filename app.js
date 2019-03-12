@@ -172,7 +172,7 @@ app.get(CALLBACK_URL, passport.authenticate(WebAppStrategy.STRATEGY_NAME));
 // Protected area. If current user is not authenticated - redirect to the login widget will be returned.
 // In case user is authenticated - a page with current user information will be returned.
 app.get("/protected", function tryToRefreshTokensIfNotLoggedIn(req, res, next) {
-    if (module.exports.isLoggedIn(req)) {
+    if (exports.isLoggedIn(req)) {
         return next();
     }
 
@@ -188,13 +188,12 @@ app.get("/protected", function tryToRefreshTokensIfNotLoggedIn(req, res, next) {
     var firstLogin;
     // get the attributes for the current user:
     userProfileManager.getAllAttributes(accessToken).then(function (attributes) {
-        var toggledItem = req.query.foodItem;
         preference = attributes.preference ? JSON.parse(attributes.preference) : [];
         firstLogin = !isGuest && !attributes.points;
         if (!firstLogin) {
             return;
         }
-        preference = {font: "10", view: "complex"};
+        // preference = {font: "10", view: "complex"};
         return userProfileManager.setAttribute(accessToken, "preference", JSON.stringify(preference));
     }).then(function () {
         renderProfile(req, res, preference, isGuest, isCD, firstLogin);
@@ -230,7 +229,7 @@ app.get("/userInfo", passport.authenticate(WebAppStrategy.STRATEGY_NAME), functi
     //return the user info data
     userProfileManager.getUserInfo(req.session[WebAppStrategy.AUTH_CONTEXT].accessToken).then(function (userInfo) {
         res.setHeader('Content-Type', 'application/json');
-        res.send(userInfo.identities);
+        res.send(userInfo);
     }).catch(function() {
         res.setHeader('Content-Type', 'application/json');
         res.send({infoError: 'infoError'});
@@ -290,6 +289,7 @@ function renderProfile(req, res, preferences, isGuest, isCD, firstLogin) {
 
     if (firstLogin) {
         userProfileManager.setAttribute(req.session[WebAppStrategy.AUTH_CONTEXT].accessToken, "points", "100").then(function (attributes) {
+            renderOptions['attributes'] = attributes;
             res.send(renderOptions);
         });
     } else {

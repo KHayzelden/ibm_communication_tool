@@ -46,11 +46,11 @@ $("#editbutton1").click(function(){
 
 $('#deleteButton').click(function(){
     copyText($(this));
-})
+});
         
 $('#deleteButton1').click(function(){
     copyText($(this));
-})
+});
   
 /* delete the item */
 function copyText(butt){
@@ -83,7 +83,7 @@ function copyText(butt){
 $('#list-sentences').click(function(){
     var html = '<span class="input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>';
     inText($(this), html);
-})
+});
 
 $('#list-searches').on("click", "a", function(){
     //var html = '<span class="input1 input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>';
@@ -91,7 +91,7 @@ $('#list-searches').on("click", "a", function(){
     
     console.log("Clicked on " + this.id);
     inText(this.id, this.rev);
-})
+});
 
 
 var db = new PouchDB('ibm-communication');  //create the database
