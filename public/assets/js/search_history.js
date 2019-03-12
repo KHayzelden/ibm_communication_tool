@@ -38,12 +38,21 @@ function refresh_history_list(needRefresh, data){
 			ul.className = "mdui-list-dense";
 			div3.appendChild(ul);
 
-			for(var j = 0; j < result.length; j++){
-				var l = document.createElement('li');
-				l.className = "mdui-list-item mdui-ripple";
-				l.appendChild(document.createTextNode(result[j].tweet));
-				ul.appendChild(l);
-			}
+			for(var j = 0; j < result.length; j++)
+				(function(j){
+					var l = document.createElement('li');
+					var content = result[j].tweet;
+					l.appendChild(document.createTextNode(content));
+					l.className = "mdui-list-item mdui-ripple";
+					// l.setAttribute("id", );
+					l.onclick = function(){
+						responsiveVoice.speak(l.innerText);
+						l.style.color = "red";
+					};
+					ul.appendChild(l);
+				})(j);
+				
+			
 			div.appendChild(div3);
 			container.appendChild(li);
 			container.appendChild(div);
