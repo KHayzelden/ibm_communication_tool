@@ -1,56 +1,58 @@
+var isEditSearch = false;
+var isEditSentence = false;
+
 $("#editbutton").click(function(){
     console.log($(this).html());
     if($(this).html() == "Edit")
     {
         $("#editbutton").text("Cancel");
-        //$("#saveButton").attr("style","display:inline-block");
         $("#addbutton").attr("style","display:none"); 
         $("#editCaption").attr("style","display:block");
         $("#deleteButton").attr("style","display:inline-block");
         $(".input").attr("style","display:inline-block");
+        isEditSearch = true;
     }
     else if($(this).html() == "Cancel")
     {
         $("#editbutton").text("Edit");
-        //$("#saveButton").attr("style","display:none");
         $("#addbutton").attr("style","display:inline-block"); 
         $("#editCaption").attr("style","display:none");
         $("#deleteButton").attr("style","display:none");
         $(".input").attr("style","display:none");
+        isEditSearch = false;
     } 
 });
 
 $("#editbutton1").click(function(){
- 
-    console.log($(this).html());
+
     if($(this).html() == "Edit")
     {
         
         $("#editbutton1").text("Cancel")       
         $("#addbutton1").attr("style","display:none"); 
-        //$("#saveButton1").attr("style","display:inline-block");
         $("#editCaption1").attr("style","display:block");
         $("#deleteButton1").attr("style","display:inline-block");
         $(".input1").attr("style","display:inline-block");
+        isEditSentence = true;
     }
     else if($(this).html() == "Cancel")
     {
         $("#editbutton1").text("Edit");
         $("#addbutton1").attr("style","display:inline-block");
-        //$("#saveButton1").attr("style","display:none");
         $("#editCaption1").attr("style","display:none");
         $("#deleteButton1").attr("style","display:none");
         $(".input1").attr("style","display:none");
+        isEditSentence = false;
     }     
 });
 
 $('#deleteButton').click(function(){
     copyText($(this));
-});
+})
         
 $('#deleteButton1').click(function(){
     copyText($(this));
-});
+})
   
 /* delete the item */
 function copyText(butt){
@@ -80,19 +82,17 @@ function copyText(butt){
 }
 
 /* update content */
-$('#list-sentences').click(function(){
-    var html = '<span class="input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>';
-    inText($(this), html);
-});
+$('#list-sentences').on("click", "a", function(){
+    if(isEditSentence){
+        inText(this.id, this.rev, $(this).children(':first').text(), 'sentence');
+    }
+})
 
 $('#list-searches').on("click", "a", function(){
-    //var html = '<span class="input1 input-group-addon" style = "visibility:hidden"><input type="checkbox"></span></a>';
-    //inText($(this), html);
-    
-    console.log("Clicked on " + this.id);
-    inText(this.id, this.rev);
-});
-
+    if(isEditSearch){
+        inText(this.id, this.rev, $(this).children(':first').text(), 'search');
+    }
+})
 
 var db = new PouchDB('ibm-communication');  //create the database
 db.changes({ 
@@ -104,15 +104,26 @@ db.changes({
         if(deleteItem.length) {
             deleteItem.remove();
         }
-    } else {
-        if(change.doc.type == 'sentence')
-        {
-            console.log(change.doc._rev);
-            var HTMLString = 
+    } else if($('#'+change.id).length) {
+        $('#'+change.id).children(':first').text(change.doc.term);
+        $('#'+change.id).attr('rev', change.doc._rev);
+    }
+    else {
+        var boxType = null;
+        var listType = null;
+        if(change.doc.type == "sentence"){
+            boxType = "input1";
+            listType = "#list-sentences";
+        }
+        else if(change.doc.type == "search"){
+            boxType = "input";
+            listType = "#list-searches";
+        }
+        var HTMLString = 
             '<a id="' + change.doc._id + '" rev="' + change.doc._rev + '" class="list-group-item' +
             ' d-flex justify-content-between align-items-center draggable="true" " href="#list-item-1">' +
-                change.doc.term + 
-                '<span class="input1" style = "display:none">' +
+                '<div>' + change.doc.term + '</div>' +
+                '<span class="'+ boxType +'" style = "display:none">' +
                     '<div class="form-check">' + 
                         '<label class="form-check-label">' + 
                             '<input class="form-check-input" type="checkbox" value=""\>' + 
@@ -121,32 +132,12 @@ db.changes({
                     '</div>' +
                 '</span>' +
             '</a>';
-
-            var HTMLString1 = '<a id="' + change.doc._id + '" rev="' + change.doc._rev + '"class="list-group-item' +  'd-flex justify-content-between align-items-center" >' +change.doc.term+  '</a>'
-            console.log(HTMLString);
-            console.log(HTMLString1);
-            $('#list-sentences').append($.parseHTML(HTMLString));
-            $('#list-sentences1').append($.parseHTML(HTMLString));
-
-        }
-        else if(change.doc.type == 'search')
-        {
-            var HTMLString = 
-            '<a id="' + change.doc._id + '" rev="' + change.doc._rev + '" class="list-group-item' +
-            ' d-flex justify-content-between align-items-center draggable="true" " href="#list-item-1">' +
-                change.doc.term + 
-                '<span class="input" style = "display:none">' +
-                    '<div class="form-check">' + 
-                        '<label class="form-check-label">' + 
-                            '<input class="form-check-input" type="checkbox" value=""\>' + 
-                            '<span class="form-check-sign"></span>' + 
-                        '</label>' +
-                    '</div>' +
-                '</span>' +
-            '</a>';
-            $('#list-searches').append($.parseHTML(HTMLString));
-            $('#list-searches1').append($.parseHTML(HTMLString));
-        }
+        var item = $.parseHTML(HTMLString);
+        $(listType).append(item);
+        $('#'+change.id).find('label').click(function(e){
+            e.stopPropagation();
+        });
+        $(listType+"1").append(item);
     }
 });
 
@@ -202,46 +193,38 @@ $("#inputsearch").focus(function() {
     $("#warninginput2").css("visibility", "hidden");
 })
 
+
+        
 /* Update content */
-function inText(getId, rev){
+function inText(getId, rev, text,type){
     swal("Enter what you want to update:", {
-        content: "input",
+        content: {
+            element: "input",
+            attributes: {
+              value: text,
+            },
+          },
         buttons: true,
         dangerMode: true,
+   
       })
       .then((value) => {
         if(value)
         {
-            console.log(value);
-           /* db.put({
-                _id:  getId,
-                user: $("#userEmail").val(),
-                _rev: rev,
-                search: value, 
-                type: 'search',
-            }, function (err, res) {
-                if (err) {
-                throw new Error(err)
-                }
-            })*/
-
             db.get(getId).then(function(doc) {
                 return db.put({
                   _id:  getId,
                   user: $("#userEmail").val(),
                   _rev: rev,
                   term: value,
-                  type: 'search',
+                  type: type,
                 });
               }).then(function(response) {
                 // handle response
               }).catch(function (err) {
                 console.log(err);
               });
-            /*html = '<a class="list-group-item  d-flex justify-content-between align-items-center draggable="true"" href="#list-item-1">' + value + html;
-            var source = $( html );
-            bindDrag(source);
-            source.appendTo( butt.parent().prev() ); */
+            
             swal("Successfully Added");
         }
       });
@@ -276,24 +259,6 @@ source.each(function(){
     bindDrag($(this));
 });
 
-/* log out jump function*/
-$('#logout').click(function(){
-    swal({
-            title: "Do you want to log out??",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-    .then((willDelete) => {
-            if (willDelete) 
-            {
-                window.location.href = "/logout";
-                swal("Logging out", {
-                icon: "success",
-                });
-            }
-        });
-})
 
 
 

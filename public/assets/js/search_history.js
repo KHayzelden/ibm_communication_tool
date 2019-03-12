@@ -53,7 +53,6 @@ function refresh_history_list(data){
 		container.appendChild(li);
 		container.appendChild(div);
 	}
-
 };
 
 socket.on('message', function(data){
