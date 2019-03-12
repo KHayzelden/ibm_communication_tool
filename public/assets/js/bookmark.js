@@ -24,8 +24,7 @@ $("#editbutton").click(function(){
 });
 
 $("#editbutton1").click(function(){
- 
-    console.log($(this).html());
+
     if($(this).html() == "Edit")
     {
         
@@ -94,7 +93,6 @@ $('#list-searches').on("click", "a", function(){
         inText(this.id, this.rev, $(this).children(':first').text(), 'search');
     }
 })
-
 
 var db = new PouchDB('ibm-communication');  //create the database
 db.changes({ 
