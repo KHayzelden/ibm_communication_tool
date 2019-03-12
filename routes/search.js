@@ -15,7 +15,7 @@ module.exports = function(router, app){
 		socket.on('search keywords', (data) => {
 		    let keyword = data.replace('#','');
 			console.log("Received keywords!");
-			let search = 'https://watson-twitter-communication.eu-gb.mybluemix.net/search?keyword=' + keyword.split(' ').join('+');
+			let search = 'https://communicationibm.eu-gb.mybluemix.net/search?keyword=' + keyword.split(' ').join('+');
 
             let request = https.get(search, (resp) => {
                 let result = '';
