@@ -65,26 +65,6 @@ if (appEnv.services['cloudantNoSQLDB'] || appEnv.getService(/cloudant/)) {
     cloudant = Cloudant(process.env.CLOUDANT_URL);
 }
 
-if(cloudant != null) {
-    //database name
-    var dbName = 'watsoncommdb';
-
-    cloudant.db.list(function(err, allDbs) {
-        if(! (allDbs.indexOf(dbName) > -1)) {
-            // Create a new "mydb" database.
-            cloudant.db.create(dbName, function(err, data) {
-                if(!err) //err if database doesn't already exists
-                    console.log("Created database: " + dbName);
-                else
-                    console.log(err);
-            });
-        }
-    });
-    // Specify the database we are going to use (mydb)...
-    exports.useDb = cloudant.db.use(dbName);
-    // console.log(useDb);
-}
-
 app.enable('trust proxy');
 
 app.use (function (req, res, next) {
@@ -143,19 +123,33 @@ app.get(LOGIN_URL, passport.authenticate(WebAppStrategy.STRATEGY_NAME, {
     successRedirect: "/search"
 }));
 
-function storeRefreshTokenInCookie(req, res, next) {
+
+exports.storeRefreshTokenInCookie =  function(req, res, next) {
     if (req.session[WebAppStrategy.AUTH_CONTEXT] && req.session[WebAppStrategy.AUTH_CONTEXT].refreshToken) {
         const refreshToken = req.session[WebAppStrategy.AUTH_CONTEXT].refreshToken;
         /* storing user's refresh-token in a cookie with expiration of a year */
         res.cookie('refreshToken', refreshToken, {maxAge: 1000 * 60 * 60 * 24 * 365 /* 365 days */});
     }
     next();
-}
+};
 
 exports.isLoggedIn = function(req) {
     return req.session[WebAppStrategy.AUTH_CONTEXT];
 };
 
+app.get('/', function(req, res, next) {
+    if (!exports.isLoggedIn(req)) {
+        webAppStrategy.refreshTokens(req, req.cookies.refreshToken).then(function() {
+            res.redirect('/search');
+        }).catch(function() {
+            next();
+        })
+    } else {
+        res.redirect('/search');
+    }
+}, function(req,res,next) {
+    res.render('index', {title: 'Watson Twitter Communication', page_name: 'search'})
+});
 // Callback to finish the authorization process. Will retrieve access and identity tokens/
 // from AppID service and redirect to either (in below order)
 // 1. the original URL of the request that triggered authentication, as persisted in HTTP session under WebAppStrategy.ORIGINAL_URL key.
@@ -163,45 +157,63 @@ exports.isLoggedIn = function(req) {
 // 3. application root ("/")
 app.get(CALLBACK_URL, passport.authenticate(WebAppStrategy.STRATEGY_NAME));
 
-// app.get('/protected', passport.authenticate(WebAppStrategy.STRATEGY_NAME), function(req, res) {
-//     console.log("profile");
-//     res.setHeader('Content-Type', 'application/json');
-//     res.json(req.user);
-// });
-
-// Protected area. If current user is not authenticated - redirect to the login widget will be returned.
-// In case user is authenticated - a page with current user information will be returned.
-app.get("/protected", function tryToRefreshTokensIfNotLoggedIn(req, res, next) {
+app.get('/search', function tryToRefreshTokensIfNotLoggedIn(req, res, next) {
     if (exports.isLoggedIn(req)) {
         return next();
     }
-
     webAppStrategy.refreshTokens(req, req.cookies.refreshToken).finally(function() {
         next();
     });
-}, passport.authenticate(WebAppStrategy.STRATEGY_NAME), storeRefreshTokenInCookie, function (req, res, next) {
+
+}, passport.authenticate(WebAppStrategy.STRATEGY_NAME), exports.storeRefreshTokenInCookie, function (req, res, next) {
     var accessToken = req.session[WebAppStrategy.AUTH_CONTEXT].accessToken;
-    console.log(accessToken);
+    res.locals.currentUser = req.user;
     var isGuest = req.user.amr[0] === "appid_anon";
     var isCD = req.user.amr[0] === "cloud_directory";
-    var preference;
     var firstLogin;
     // get the attributes for the current user:
     userProfileManager.getAllAttributes(accessToken).then(function (attributes) {
-        preference = attributes.preference ? JSON.parse(attributes.preference) : [];
-        firstLogin = !isGuest && !attributes.points;
-        if (!firstLogin) {
-            return;
-        }
-        // preference = {font: "10", view: "complex"};
-        return userProfileManager.setAttribute(accessToken, "preference", JSON.stringify(preference));
+        firstLogin = !isGuest && !attributes.returning;
     }).then(function () {
-        renderProfile(req, res, preference, isGuest, isCD, firstLogin);
+        var hintText;
+        var dbName = '';
+        // if (firstLogin) {
+        //     hintText = "first_login";
+            //database name
+        dbName = req.user.email.replace('@','').replace(/./g,'');
+        if(cloudant != null) {
+            cloudant.db.list(function(err, allDbs) {
+                if(! (allDbs.indexOf(dbName) > -1)) {
+                    // Create a new "mydb" database.
+                    cloudant.db.create(dbName, function(err, data) {
+                        if(!err) //err if database doesn't already exists
+                            console.log("Created database: " + dbName);
+                        else
+                            console.log(err);
+                    });
+                }
+            });
+        }
+        // }
+        var renderOptions = {
+            title: 'Watson Twitter Communication',
+            page_name: 'search',
+            dbName,
+            isGuest,
+            firstLogin,
+            isCD
+        };
+        if (firstLogin) {
+            userProfileManager.setAttribute(req.session[WebAppStrategy.AUTH_CONTEXT].accessToken, "returning", "true").then(function (attributes) {
+                res.render('search', renderOptions);
+            });
+        } else {
+            res.render('search', renderOptions);
+        }
     }).catch(function (e) {
         next(e);
     });
 });
-
 // Protected area. If current user is not authenticated - an anonymous login process will trigger.
 // In case user is authenticated - a page with current user information will be returned.
 app.get("/guest_login", passport.authenticate(WebAppStrategy.STRATEGY_NAME, {allowAnonymousLogin: true, successRedirect : '/search', forceLogin: true}));
@@ -210,11 +222,31 @@ app.get("/guest_login", passport.authenticate(WebAppStrategy.STRATEGY_NAME, {all
 // In case user is authenticated - a page with current user information will be returned.
 app.get("/login", passport.authenticate(WebAppStrategy.STRATEGY_NAME, {successRedirect : '/search'}));
 
-app.get("/logout", function(req, res, next) {
+app.get("/logout", function(req, res) {
     WebAppStrategy.logout(req);
     // If you chose to store your refresh-token, don't forgot to clear it also in logout:
     res.clearCookie("refreshToken");
-    res.redirect("/search");
+    res.redirect("/");
+});
+
+app.get("/guest_logout", function(req, res) {
+    WebAppStrategy.logout(req);
+    // If you chose to store your refresh-token, don't forgot to clear it also in logout:
+    res.clearCookie("refreshToken");
+    res.redirect("/");
+});
+
+app.get("/guest_register", function(req, res) {
+    WebAppStrategy.logout(req);
+    // If you chose to store your refresh-token, don't forgot to clear it also in logout:
+    res.clearCookie("refreshToken");
+    res.redirect("/register");
+});
+app.get("/guest_signin", function(req, res) {
+    WebAppStrategy.logout(req);
+    // If you chose to store your refresh-token, don't forgot to clear it also in logout:
+    res.clearCookie("refreshToken");
+    res.redirect("/login");
 });
 
 app.get("/register", passport.authenticate(WebAppStrategy.STRATEGY_NAME, {successRedirect: "/login", show: WebAppStrategy.SIGN_UP}));
@@ -246,7 +278,6 @@ app.get("/change_details", passport.authenticate(WebAppStrategy.STRATEGY_NAME, {
     show: WebAppStrategy.CHANGE_DETAILS
 }));
 
-
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -255,6 +286,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+// app.use('/search', search);
 
 
 // start server on the specified port and binding host

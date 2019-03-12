@@ -1,18 +1,18 @@
 <% include partials/navbar.ejs %>
 
 
-<script>
-      if('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js', { scope: '/' })
-          .then(function(registration) {
-                console.log('Service Worker Registered');
-          });
+<!--<script>-->
+      <!--if('serviceWorker' in navigator) {-->
+        <!--navigator.serviceWorker.register('/sw.js', { scope: '/' })-->
+          <!--.then(function(registration) {-->
+                <!--console.log('Service Worker Registered');-->
+          <!--});-->
 
-        navigator.serviceWorker.ready.then(function(registration) {
-           console.log('Service Worker Ready');
-        });
-      }
-    </script>
+        <!--navigator.serviceWorker.ready.then(function(registration) {-->
+           <!--console.log('Service Worker Ready');-->
+        <!--});-->
+      <!--}-->
+    <!--</script>-->
     <div class="wrapper">
         <div class="main-panel">
             <!-- Navbar -->
@@ -138,7 +138,7 @@
                         </div>
                     </div>
                     <% } %>
-                    <% if(currentUser) { %>
+                    <% if(isCD) { %>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="card ">

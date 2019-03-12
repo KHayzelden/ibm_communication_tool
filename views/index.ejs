@@ -1,51 +1,106 @@
-<!DOCTYPE html>
-<html>
-
 <head>
+    <meta charset="utf-8" />
+    <link rel="appicon" sizes="76x76" href="../assets/img/appicon.png">
+    <link rel="icon" type="image/png" href="../assets/img/icon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title><%= title %></title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="stylesheets/style.css">
     <link rel="manifest" href="manifest.json">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!-- Fonts and icons -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+
+    <!-- CSS Files -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet" />
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.2/css/mdui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.standalone.css">
+    <link rel="stylesheet" href="../assets/css/profile_pen.css">
+    <script src="/socket.io/socket.io.js"></script>
+
 
 </head>
-
 <body>
-    <script>
-      if('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js', { scope: '/' })
-          .then(function(registration) {
-                console.log('Service Worker Registered');
-          });
-
-        navigator.serviceWorker.ready.then(function(registration) {
-           console.log('Service Worker Ready');
-        });
-      }
-
-    </script>
-<table>
-    <tr>
-        <td style= "width:30%;">
-            <img class = "newappIcon" src="images/newapp-icon.png">
-        </td>
-        <td>
-            <h1 id="message">Hello World!</h1>
-            <p class='description'></p> Thanks for creating a <span class = "blue">NodeJS Starter Application</span>.
-            <form action="/add_name" method="POST">
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="username" class="form-control" >
-                    <input type="submit" name="submit" value="submit" class="btn btn-default">
+    <div class="sidebar" data-color="blue">
+        <div class="sidebar-wrapper">
+            <div class="logo"> <!-- the users icon? -->
+                <a class="simple-text">Welcome</a>
+            </div>
+            <ul class="nav">
+                <li class="nav-item active active-pro">
+                    <a class="nav-link active" href="./help">
+                        <i class="nc-icon nc-puzzle-10"></i>
+                        <p>Help</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+                <div class=" container-fluid  ">
+                    <a class="navbar-brand"> <%=title%> </a>
+                    <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                    </button>
                 </div>
-            </form>
-            <% users.forEach(function (user) { %>
-                <li><%=user%></li>
-            <%})%>
-
-        </td>
-    </tr>
-</table>
+            </nav>
+            <!-- End Navbar -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card text-center" style="max-width: 40rem;">
+                                <div class="card-header">
+                                    <h1><%=title%></h1>
+                                </div>
+                                <div class="card-body">
+                                    <div id="login-register-div" class="row">
+                                        <div id="login" class="col">
+                                            <a href="/login" class="btn btn-outline-info"  style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;">
+                                                Sign In
+                                            </a>
+                                        </div>
+                                        <div id="register" class="col">
+                                            <a href="/register" class="btn btn-outline-info"  style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;">
+                                                Register
+                                            </a>
+                                        </div>
+                                        <div id="guest" class="col-sm">
+                                            <a href="/guest_login" class="btn btn-outline-info" style="background-color:#4091e2; border-color:#4091e2;color:#ffffff;">
+                                                Continue as Guest
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+<!--<script>-->
+  <!--if('serviceWorker' in navigator) {-->
+    <!--navigator.serviceWorker.register('/sw.js', { scope: '/' })-->
+      <!--.then(function(registration) {-->
+            <!--console.log('Service Worker Registered');-->
+      <!--});-->
 
-</html>
+    <!--navigator.serviceWorker.ready.then(function(registration) {-->
+       <!--console.log('Service Worker Ready');-->
+    <!--});-->
+  <!--}-->
+
+<!--</script>-->
+
+
+<% include partials/footer.ejs %>

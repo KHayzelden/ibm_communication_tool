@@ -11,12 +11,6 @@ require('./settings')(router, app);
 
 router.get('/navbar', function(req, res, next) {
     res.render('navbar', {title: 'Watson Twitter Communication', name: 'HSmith', loggedIn: true});
-
-});
-
-router.get('/', function(req, res, next) {
-    res.redirect('/search')
-
 });
 
 module.exports = router;

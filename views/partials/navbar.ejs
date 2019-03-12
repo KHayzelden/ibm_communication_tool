@@ -27,15 +27,15 @@
 <div class="sidebar" data-color="blue">
     <div class="sidebar-wrapper">
         <div class="logo"> <!-- the users icon? -->
-            <% if(currentUser) {
+            <% if(currentUser.name !== undefined) {
             %>
                 <a href="account" class="simple-text" > <!-- link to the profile page -->
                     <%= currentUser.name %>
                     <input style="display: none;" value=  '<%= currentUser.email %>'  id = "userEmail">
                 </a>
-            <%
-            }
-            else { %>
+            <% } else if(isGuest) { %>
+                <a class="simple-text">Guest</a>
+            <%} else { %>
                 <a class="simple-text">Welcome</a>
             <% } %>
          
@@ -47,8 +47,7 @@
                     <p>Search</p>
                 </a>
             </li>
-
-            <% if (currentUser) { %>
+            <% if (currentUser.name !== undefined) { %>
                 <% if (page_name === 'search_history') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
                     <a class="nav-link" href="/search_history">
                         <i class="nc-icon nc-single-copy-04"></i>
@@ -82,13 +81,13 @@
             <% } 
             else { %>
                 <li>
-                    <a class="nav-link" href="/register">
+                    <a class="nav-link" href="/guest_register">
                         <i class="nc-icon nc-circle-09"></i>
                         <p>Register</p>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="/login">
+                    <a class="nav-link" href="/guest_signin">
                         <i class="nc-icon nc-button-power"></i>
                         <p>Log In</p>
                     </a>
