@@ -24,8 +24,7 @@ $("#editbutton").click(function(){
 });
 
 $("#editbutton1").click(function(){
- 
-    console.log($(this).html());
+
     if($(this).html() == "Edit")
     {
         
