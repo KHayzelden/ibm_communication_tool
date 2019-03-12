@@ -47,6 +47,16 @@ function refresh_history_list(needRefresh, data){
 			div.appendChild(div3);
 			container.appendChild(li);
 			container.appendChild(div);
+
+			let voiceMessage = document.getElementsByClassName("mdui-list-item mdui-ripple");
+		    for ( var i = 0; i < voiceMessage.length; i++ ) (function(i){
+		        voiceMessage[i].onclick = function() {
+		            // do something
+		            responsiveVoice.speak(voiceMessage[i].innerText);
+		            voiceMessage[i].style.color = "red";
+
+		        }
+		    })(i);
 		}
 	}else{
 		var found_result = [];

@@ -36,6 +36,8 @@ socket.on('show results', (data) =>{
         voiceMessage[i].onclick = function() {
             // do something
             responsiveVoice.speak(voiceMessage[i].innerText);
+            voiceMessage[i].style.color = "red";
+
         }
     })(i);
 
