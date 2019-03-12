@@ -71,6 +71,7 @@ $(window).on('load', function(){
                 // do something
                 showResults(trends[i].innerText);
                 document.getElementById("searchbar").value = trends[i].innerText;
+                document.getElementById("searchbarsmall").value = trends[i].innerText;
             }
         })(i);
  });
@@ -84,7 +85,7 @@ function push_to_db(data, searchJson){
  }
  db.post({
    user: user,
-   keywords: data.keyword, 
+   keywords: data.keyword,
    type: 'history',
    result: searchJson
  }, function (err, res) {
