@@ -28,3 +28,4 @@ This application demonstrates a simple, reusable Node.js web application based o
 - Create an empty views/sw.js file in the views directory (the same directory as the index.ejs)
 - Define paths for static assets within both Service Worker files (especially the one in the public/sw.js directory)
 - [Useful Caching Strategies](https://developers.google.com/web/tools/workbox/modules/workbox-strategies#cache_first_cache_falling_back_to_network) 
+- [Detailed Caching Implementation](https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/)
