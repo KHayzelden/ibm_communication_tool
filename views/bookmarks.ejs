@@ -1,6 +1,7 @@
 <% include partials/navbar.ejs %>
     <div class="wrapper">
         <div class="main-panel">
+            <p id="hiddendb" style="display:none"></p>
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class=" container-fluid  ">
@@ -161,4 +162,11 @@
 
         </div>
     </div>
+
+<script>
+    var name = '<%=currentUser.email%>'.replace('@','');
+    var dbName = name.replace(/\./,'');
+    console.log(dbName)
+    document.getElementById("hiddendb").innerHTML=dbName;
+</script>
 <% include partials/footer.ejs %>

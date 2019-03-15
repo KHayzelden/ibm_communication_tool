@@ -121,15 +121,33 @@ $('#list-sentences').on("click", "a", function(){
     if(isEditSentence){
         inText(this.id, this.rev, $(this).children(':first').text(), 'sentence');
     }
-})
+});
 
 $('#list-searches').on("click", "a", function(){
     if(isEditSearch){
         inText(this.id, this.rev, $(this).children(':first').text(), 'search');
     }
-})
+});
 
+var syncHandler;
+var dbName = document.getElementById("hiddendb").innerText;
 var db = new PouchDB('ibm-communication');  //create the database
+var remoteDb= new PouchDB("https://dcb15006-0d75-415e-9bc5-5451e89fb37d-bluemix:40517ab4561f6d35f5425fb308cefab7417325da9f6ebb630f534a75ad7a5775@dcb15006-0d75-415e-9bc5-5451e89fb37d-bluemix.cloudantnosqldb.appdomain.cloud/"+dbName);
+syncHandler = db.sync(remoteDb, {
+    live: true,
+    retry: true
+});
+syncHandler.on('complete', function (info) {
+    // replication was canceled!
+    console.log("Sync cancelled");
+    db.destroy();
+    console.log("DB Destroyed");
+});
+syncHandler.on('error', function (err) {
+    // boo, we hit an error!
+    console.log("Error",err);
+});
+
 db.changes({ 
     live: true,
     include_docs: true
@@ -244,8 +262,6 @@ $("#inputsearch").focus(function() {
     $("#warninginput2").css("visibility", "hidden");
 })
 
-
-        
 /* Update content */
 function inText(getId, rev, text,type){
     swal("Enter what you want to update:", {
@@ -309,7 +325,3 @@ var source = $('.list-group-item');
 source.each(function(){
     bindDrag($(this));
 });
-
-
-
-

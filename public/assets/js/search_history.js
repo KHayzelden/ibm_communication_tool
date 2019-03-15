@@ -69,9 +69,7 @@ function refresh_history_list(needRefresh, data){
 		}
 
 	}
-	
 }
-
 
 function show_history(keywords) {
 	if(keywords == null){
@@ -90,5 +88,3 @@ function show_history(keywords) {
 		refresh_history_list(false ,keywords);
 	}
 }
-
-

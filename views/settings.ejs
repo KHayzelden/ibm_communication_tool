@@ -22,4 +22,11 @@
             </div>
         </div>
     </div>
+<p id="hiddendb" style="display:none"></p>
+<script>
+    var name = '<%=currentUser.email%>'.replace('@','');
+    var dbName = name.replace(/\./,'');
+    console.log(dbName)
+    document.getElementById("hiddendb").innerHTML=dbName;
+</script>
 <% include partials/footer.ejs %>

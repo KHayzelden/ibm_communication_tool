@@ -71,7 +71,7 @@ $(window).on('load', function(){
             trends[i].onclick = function() {
                 // do something
                 showResults(trends[i].innerText);
-                document.getElementById("searchbar").value = trends[i].innerText;
+                document.getElementById("searchbar1").value = trends[i].innerText;
                 document.getElementById("searchbarsmall").value = trends[i].innerText;
             }
         })(i);

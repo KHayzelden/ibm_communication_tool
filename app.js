@@ -150,6 +150,7 @@ app.get('/', function(req, res, next) {
 }, function(req,res,next) {
     res.render('index', {title: 'Watson Twitter Communication', page_name: 'search'})
 });
+
 // Callback to finish the authorization process. Will retrieve access and identity tokens/
 // from AppID service and redirect to either (in below order)
 // 1. the original URL of the request that triggered authentication, as persisted in HTTP session under WebAppStrategy.ORIGINAL_URL key.
@@ -159,6 +160,7 @@ app.get(CALLBACK_URL, passport.authenticate(WebAppStrategy.STRATEGY_NAME));
 
 app.get('/search', function tryToRefreshTokensIfNotLoggedIn(req, res, next) {
     if (exports.isLoggedIn(req)) {
+        res.locals.currentUser = req.user;
         return next();
     }
     webAppStrategy.refreshTokens(req, req.cookies.refreshToken).finally(function() {
@@ -175,30 +177,47 @@ app.get('/search', function tryToRefreshTokensIfNotLoggedIn(req, res, next) {
     userProfileManager.getAllAttributes(accessToken).then(function (attributes) {
         firstLogin = !isGuest && !attributes.returning;
     }).then(function () {
-        var hintText;
         var dbName = '';
-        // if (firstLogin) {
-        //     hintText = "first_login";
+
+        if (isCD) {
             //database name
-        dbName = req.user.email.replace('@','').replace(/./g,'');
-        if(cloudant != null) {
-            cloudant.db.list(function(err, allDbs) {
-                if(! (allDbs.indexOf(dbName) > -1)) {
-                    // Create a new "mydb" database.
-                    cloudant.db.create(dbName, function(err, data) {
-                        if(!err) //err if database doesn't already exists
-                            console.log("Created database: " + dbName);
-                        else
-                            console.log(err);
-                    });
-                }
-            });
+            var name = req.user.email.replace('@','');
+            dbName = name.replace(/\./g,'');
+            if(cloudant != null) {
+                cloudant.db.list(function(err, allDbs) {
+                    if(! (allDbs.indexOf(dbName) > -1)) {
+                        // Create a new "mydb" database.
+                        cloudant.db.create(dbName, function(err, data) {
+                            if(!err) //err if database doesn't already exists
+                                console.log("Created database: " + dbName);
+                            else
+                                console.log(err);
+                        });
+                    }
+                });
+            }
+        } else {
+            dbName = "guests";
+            if(cloudant != null) {
+                cloudant.db.list(function(err, allDbs) {
+                    if(! (allDbs.indexOf("guests") > -1)) {
+                        // Create a new "mydb" database.
+                        cloudant.db.create(dbName, function(err, data) {
+                            if(!err) //err if database doesn't already exists
+                                console.log("Created database: " + guests);
+                            else
+                                console.log(err);
+                        });
+                    }
+                });
+            }
         }
+
         // }
         var renderOptions = {
             title: 'Watson Twitter Communication',
             page_name: 'search',
-            dbName,
+            dbName: dbName,
             isGuest,
             firstLogin,
             isCD
@@ -294,40 +313,6 @@ server.listen(appEnv.port, '0.0.0.0', function() {
   // print a message when the server starts listening
   console.log("server starting on " + appEnv.url);
 });
-
-function renderProfile(req, res, preferences, isGuest, isCD, firstLogin) {
-    //return the protected page with user info
-    var hintText;
-    if (isGuest) {
-        hintText = "Guest User";
-    } else {
-        if (firstLogin) {
-            hintText = "First Login";
-        } else {
-            hintText = "Returning User";
-        }
-    }
-    var email = req.user.email;
-    if(req.user.email !== undefined && req.user.email.indexOf('@') > -1)
-        email = req.user.email.substr(0,req.user.email.indexOf('@'));
-    var renderOptions = {
-        name: req.user.name || email || "Guest",
-        preferences: JSON.stringify(preferences),
-        topHintText: isGuest ? "Login to get access to all features" : "",
-        hintText,
-        isGuest,
-        isCD
-    };
-
-    if (firstLogin) {
-        userProfileManager.setAttribute(req.session[WebAppStrategy.AUTH_CONTEXT].accessToken, "points", "100").then(function (attributes) {
-            renderOptions['attributes'] = attributes;
-            res.send(renderOptions);
-        });
-    } else {
-        res.send(renderOptions);
-    }
-}
 
 function getLocalConfig() {
     if (!isLocal) {
