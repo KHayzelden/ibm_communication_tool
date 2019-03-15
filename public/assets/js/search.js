@@ -15,7 +15,7 @@ socket.on('show results', (data) =>{
 		var li = document.createElement('a');
 		li.setAttribute("id", "result_list");
 		li.appendChild(document.createTextNode(sentence));
-		li.className = "list-group-item d-flex justify-content-between align-items-center";
+		li.className = "list-group-item d-flex justify-content-between align-items-center result";
 		ul.appendChild(li);
 	}
     document.getElementById('card-title').innerText = "Search Results for " + data.keyword;
@@ -31,13 +31,12 @@ socket.on('show results', (data) =>{
         }
     })(i);
 
-    let voiceMessage = document.getElementsByClassName("list-group-item d-flex justify-content-between align-items-center");
+    let voiceMessage = document.getElementsByClassName("list-group-item d-flex justify-content-between align-items-center result");
     for ( var i = 0; i < voiceMessage.length; i++ ) (function(i){
         voiceMessage[i].onclick = function() {
             // do something
             responsiveVoice.speak(voiceMessage[i].innerText);
             voiceMessage[i].style.color = "red";
-
         }
     })(i);
 
@@ -120,3 +119,13 @@ function closeResults() {
 function voice(message) {
  responsiveVoice.speak(message);
 }
+
+/* click to search */
+$('#list-sentences1').on("click", "a", function(){
+    voice($(this).children(':first').text());
+});
+
+/* click to voice */
+$('#list-searches1').on("click", "a", function(){
+    showResults($(this).children(':first').text());
+});
