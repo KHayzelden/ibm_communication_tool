@@ -5,7 +5,7 @@ const staticAssets = [
 	'./account',
 	'./bookmarks',
 	'./search_history',
-	'.settings'
+	'./settings'
 ];
 
 

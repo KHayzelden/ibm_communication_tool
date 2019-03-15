@@ -42,8 +42,6 @@ socket.on('show results', (data) =>{
     })(i);
 
 });
-
-
 socket.on('message', function(data){
     console.log('Connection successful!');
 });
@@ -61,7 +59,7 @@ $(window).on('load', function(){
       let trend = topics[i].name;
    var a = document.createElement('a');
    a.setAttribute("id", trend);
-            a.setAttribute("class", "topic");
+   a.setAttribute("class", "topic");
    a.appendChild(document.createTextNode(trend));
    div.appendChild(a);
   }
@@ -77,7 +75,7 @@ $(window).on('load', function(){
         })(i);
  });
 
-})
+});
 
 function push_to_db(data, searchJson){
 	 var user = $("#userEmail").val();
