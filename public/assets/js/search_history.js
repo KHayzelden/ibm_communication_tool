@@ -4,7 +4,8 @@ $(window).on('load', function(){
 });
 
 
-function refresh_history_list(needRefresh, data){
+
+function refresh_history_list(needRefresh, data, types){
 	var container = document.getElementById("history_list");
 
 	if(needRefresh == true){
@@ -58,16 +59,33 @@ function refresh_history_list(needRefresh, data){
 			container.appendChild(div);
 		}
 	}else{
-		var found_result = [];
-		var result_list = document.querySelector('#history_list').children;
-		for(var i = 0; i < result_list.length; i++){
-			if(!result_list[i].getAttribute('id').toLowerCase().includes(data)){
-				result_list[i].style.display = 'none';
-			}else{
-				result_list[i].style.display = 'block';
+		if(types == 'key')
+		{
+			var result_list = document.querySelector('#history_list').children;
+			for(var i = 0; i < result_list.length; i++){
+				if(!result_list[i].getAttribute('id').toLowerCase().includes(data)){
+					result_list[i].style.display = 'none';
+				}else{
+					result_list[i].style.display = 'block';
+				}
 			}
 		}
-
+		else if(types = 'time')
+		{
+			var result_list = document.getElementsByClassName("mdui-subheader");
+			for (var i = 0; i < result_list.length; i++) {
+				if(result_list[i].innerText == data)
+				{
+					result_list[i].style.display = 'block';
+					result_list[i].nextElementSibling.style.display = 'block';
+				}
+				else
+				{
+					result_list[i].style.display = 'none';
+					result_list[i].nextElementSibling.style.display = 'none';
+				}
+			}
+		}
 	}
 }
 
@@ -82,9 +100,11 @@ function show_history(keywords) {
 					history.push(docs[i].doc);
 				}
 			}
-			refresh_history_list(true, history);
+			refresh_history_list(true, history, 'all');
 		});
 	}else{
-		refresh_history_list(false ,keywords);
+		refresh_history_list(false ,keywords, 'key');
 	}
 }
+
+

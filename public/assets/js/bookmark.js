@@ -190,7 +190,7 @@ db.changes({
         $('#'+change.id).find('label').click(function(e){
             e.stopPropagation();
         });
-        $(listType+"1").append(item);
+       
     }
 });
 

@@ -32,15 +32,20 @@
 
 		    
 		<script type="text/javascript">
-		    $('#datepicker').datepicker({
-		        autoclose: true
-		    }).on('changeDate', function(e) {
-		    $("#showdate").text("History on: " + e.format());
-		    $("#clearButton").text("Back");
-		});
+			
+			
+			$('#datepicker').datepicker({
+				autoclose: true,
+				format: "dd M yyyy"
+			}).on('changeDate', function(e) {
+				console.log('change');
+				$("#showdate").text("History on: " + e.format());
+				$("#clearButton").text("Back");
+				refresh_history_list(false ,e.format(), 'time');
+			});
 
 				/* clear history function */
-		$('#clearButton').click(function(){
+			$('#clearButton').click(function(){
 			console.log("work");
 			if($(this).html() == "Clear History")
 			{
@@ -66,9 +71,9 @@
 			{
 				$("#showdate").text("History");
 				$("#clearButton").text("Clear History");
+				show_history(null);
 			}
-		})
-
+			})
 		/* log out jump function*/
 		$('#logout').click(function(){
 			swal({

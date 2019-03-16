@@ -120,6 +120,40 @@ function voice(message) {
  responsiveVoice.speak(message);
 }
 
+db.changes({ 
+    live: true,
+    include_docs: true
+}).on('change', function (change) {
+
+        var boxType = null;
+        var listType = null;
+        if(change.doc.type == "sentence"){
+            boxType = "input1";
+            listType = "#list-sentences1";
+        }
+        else if(change.doc.type == "search"){
+            boxType = "input";
+            listType = "#list-searches1";
+        }
+        var HTMLString = 
+            '<a id="' + change.doc._id + '" rev="' + change.doc._rev + '" class="list-group-item' +
+            ' d-flex justify-content-between align-items-center draggable="true" " href="#list-item-1">' +
+                '<div>' + change.doc.term + '</div>' +
+                '<span class="'+ boxType +'" style = "display:none">' +
+                    '<div class="form-check">' + 
+                        '<label class="form-check-label">' + 
+                            '<input class="form-check-input" type="checkbox" value=""\>' + 
+                            '<span class="form-check-sign"></span>' + 
+                        '</label>' +
+                    '</div>' +
+                '</span>' +
+            '</a>';
+        var item = $.parseHTML(HTMLString);
+
+        $(listType).append(item);
+    
+});
+
 /* click to search */
 $('#list-sentences1').on("click", "a", function(){
     voice($(this).children(':first').text());
