@@ -44,6 +44,16 @@
 				refresh_history_list(false ,e.format(), 'time');
 			});
 
+			$('#datepicker1').datepicker({
+				autoclose: true,
+				format: "dd M yyyy"
+			}).on('changeDate', function(e) {
+				console.log('change');
+				$("#showdate").text("History on: " + e.format());
+				$("#clearButton").text("Back");
+				refresh_history_list(false ,e.format(), 'time');
+			});
+
 				/* clear history function */
 			$('#clearButton').click(function(){
 			console.log("work");
