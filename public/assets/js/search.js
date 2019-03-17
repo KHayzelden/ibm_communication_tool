@@ -149,9 +149,7 @@ db.changes({
                 '</span>' +
             '</a>';
         var item = $.parseHTML(HTMLString);
-
         $(listType).append(item);
-    
 });
 
 /* click to search */
