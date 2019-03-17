@@ -3,8 +3,6 @@ $(window).on('load', function(){
 	show_history(null);
 });
 
-
-
 function refresh_history_list(needRefresh, data, types){
 	var container = document.getElementById("history_list");
 
@@ -12,11 +10,10 @@ function refresh_history_list(needRefresh, data, types){
 		container.innerText = "";
 		for(var i = 0; i < data.length; i++){
 			// time, keyword, result
-			var time = new Date(data[i].time).toString();
-			console.log(time);
+			var time = Date(data[i].time).toString();
 			var element = time.split(" ");
 			var simple_time = element[2] + ' ' + element[1] + ' ' + element[3]; 
-			
+
 			var keyword = data[i].keywords;
 			var result = data[i].result;
 
@@ -122,14 +119,20 @@ $('#clearButton').click(function(){
 	.then((willDelete) => {
 			if (willDelete) 
 			{
-				
                 db.allDocs({include_docs: true},function(err, docs) {
 					if (err) {
 					   return console.log(err);
 					} else {
 					   console.log(docs.rows);
+					   for(var i = 0; i < docs.rows.length; i++)
+						{
+							if(docs.rows[i].doc.type == 'history')
+							{
+								db.remove({"_id":docs.rows[i].doc._id, "_rev":docs.rows[i].doc._rev})
+							}
+						}
 					}
-				 });
+				});
 				 
 				swal("Successfully Deleted!", {
 				icon: "success",
@@ -149,3 +152,15 @@ $('#clearButton').click(function(){
 	}
 	})
 
+	db.changes({ 
+		live: true,
+		include_docs: true
+	}).on('change', function (change) {
+		if(change.deleted){
+			var deleteItem = $('#'+change.id);
+			console.log(change.id);
+			if(deleteItem.length) {
+				deleteItem.remove();
+			}
+		}
+	});
