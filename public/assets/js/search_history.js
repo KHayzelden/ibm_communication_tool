@@ -12,10 +12,11 @@ function refresh_history_list(needRefresh, data, types){
 		container.innerText = "";
 		for(var i = 0; i < data.length; i++){
 			// time, keyword, result
-			var time = Date(data[i].time).toString();
+			var time = new Date(data[i].time).toString();
+			console.log(time);
 			var element = time.split(" ");
 			var simple_time = element[2] + ' ' + element[1] + ' ' + element[3]; 
-
+			
 			var keyword = data[i].keywords;
 			var result = data[i].result;
 
