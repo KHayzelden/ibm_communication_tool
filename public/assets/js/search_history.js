@@ -8,6 +8,9 @@ function refresh_history_list(needRefresh, data, types){
 
 	if(needRefresh == true){
 		container.innerText = "";
+		if(data == null){
+			return;
+		}
 		for(var i = 0; i < data.length; i++){
 			// time, keyword, result
 			var time = Date(data[i].time).toString();
@@ -137,7 +140,8 @@ $('#clearButton').click(function(){
 				swal("Successfully Deleted!", {
 				icon: "success",
 				});
-				
+				refresh_history_list(true, null, "clean histoy")
+
 			} else 
 			{
 				swal("Your History is safe!");
@@ -150,7 +154,7 @@ $('#clearButton').click(function(){
 		$("#clearButton").text("Clear History");
 		show_history(null);
 	}
-	})
+})
 
 	db.changes({ 
 		live: true,

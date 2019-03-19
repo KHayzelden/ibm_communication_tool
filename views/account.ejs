@@ -63,16 +63,16 @@
 
                             <div class="stats">
                                 <div class="box box1 hvr-underline-from-right">
-                                    <span class="value">523</span>
+                                    <span class="value" id="search_number"></span>
                                     <span class="parameter">Topics Searched</span>
                                 </div>
                                 <div class="box box2 hvr-underline-from-right">
-                                    <span class="value">1387</span>
-                                    <span class="parameter">Sentences Spoken</span>
+                                    <span class="value" id="keyword_number"></span>
+                                    <span class="parameter">Saved Keywords</span>
                                 </div>
                                 <div class="box box3 hvr-underline-from-right">
-                                    <span class="value">146</span>
-                                    <span class="parameter">Bookmarks</span>
+                                    <span class="value" id="sentence_number"></span>
+                                    <span class="parameter">Saved Sentences</span>
                                 </div>
                             </div>
                         </div>
@@ -89,3 +89,4 @@
     document.getElementById("hiddendb").innerHTML=dbName;
 </script>
 <% include partials/footer.ejs %>
+<script src="../assets/js/account.js"></script>
