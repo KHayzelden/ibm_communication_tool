@@ -50,7 +50,6 @@ function refresh_history_list(needRefresh, data, types){
 					};
 					ul.appendChild(l);
 				})(j);
-				
 			
 			div.appendChild(div3);
 			container.appendChild(li);
