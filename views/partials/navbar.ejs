@@ -24,87 +24,86 @@
     <link rel="stylesheet" href="../assets/css/profile_pen.css">
     <script src="/socket.io/socket.io.js"></script>
 
-
 </head>
 <body>
-<div class="sidebar" data-color="blue">
-    <div class="sidebar-wrapper">
-        <div class="logo"> <!-- the users icon? -->
-            <% if(currentUser.name !== undefined) {
-            %>
-                <a href="account" class="simple-text" > <!-- link to the profile page -->
-                    <%= currentUser.name %>
-                    <input style="display: none;" value=  '<%= currentUser.email %>'  id = "userEmail">
-                </a>
-            <% } else if(isGuest) { %>
-                <a class="simple-text">Guest</a>
-            <%} else { %>
-                <a class="simple-text">Welcome</a>
-            <% } %>
-         
-        </div>
-        <ul class="nav">
-            <% if (page_name === 'search') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
-                <a class="nav-link" href="/search">
-                    <i class="nc-icon nc-zoom-split"></i>
-                    <p>Search</p>
-                </a>
-            </li>
-            <% if (currentUser.name !== undefined) { %>
-                <% if (page_name === 'search_history') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
-                    <a class="nav-link" href="/search_history">
-                        <i class="nc-icon nc-single-copy-04"></i>
-                        <p>History</p>
+    <div class="sidebar" data-color="blue">
+        <div class="sidebar-wrapper">
+            <div class="logo"> <!-- the users icon? -->
+                <% if(currentUser.name !== undefined) {
+                %>
+                    <a href="account" class="simple-text" > <!-- link to the profile page -->
+                        <%= currentUser.name %>
+                        <input style="display: none;" value=  '<%= currentUser.email %>'  id = "userEmail">
+                    </a>
+                <% } else if(isGuest) { %>
+                    <a class="simple-text">Guest</a>
+                <%} else { %>
+                    <a class="simple-text">Welcome</a>
+                <% } %>
+            
+            </div>
+            <ul class="nav">
+                <% if (page_name === 'search') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
+                    <a class="nav-link" href="/search">
+                        <i class="nc-icon nc-zoom-split"></i>
+                        <p>Search</p>
                     </a>
                 </li>
-                <% if (page_name === 'bookmarks') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
-                    <a class="nav-link" href="/bookmarks">
-                        <i class="nc-icon nc-tag-content"></i>
-                        <p>Bookmarks</p>
-                    </a>
-                </li>
-                <% if (page_name === 'account') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
-                    <a class="nav-link" href="/account">
-                        <i class="nc-icon nc-circle-09"></i>
-                        <p>Account</p>
-                    </a>
-                </li>
-                <li>
-                    <a class="nav-link" id = 'logout' >
-                        <i class="nc-icon nc-button-power"></i>
-                        <p>Log Out</p>
-                    </a>
-                </li>
-                <% if (page_name === 'settings') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
-                    <a class="nav-link" href="/settings">
-                        <i class="nc-icon nc-settings-gear-64"></i>
-                        <p>Settings</p>
-                    </a>
-                </li>
-            <% } 
-            else { %>
-                <li>
-                    <a class="nav-link" href="/guest_register">
-                        <i class="nc-icon nc-circle-09"></i>
-                        <p>Register</p>
-                    </a>
-                </li>
-                <li>
-                    <a class="nav-link" href="/guest_signin">
-                        <i class="nc-icon nc-button-power"></i>
-                        <p>Log In</p>
-                    </a>
-                </li>
-            <% } %>
+                <% if (currentUser.name !== undefined) { %>
+                    <% if (page_name === 'search_history') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
+                        <a class="nav-link" href="/search_history">
+                            <i class="nc-icon nc-single-copy-04"></i>
+                            <p>History</p>
+                        </a>
+                    </li>
+                    <% if (page_name === 'bookmarks') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
+                        <a class="nav-link" href="/bookmarks">
+                            <i class="nc-icon nc-tag-content"></i>
+                            <p>Bookmarks</p>
+                        </a>
+                    </li>
+                    <% if (page_name === 'account') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
+                        <a class="nav-link" href="/account">
+                            <i class="nc-icon nc-circle-09"></i>
+                            <p>Account</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" id = 'logout' >
+                            <i class="nc-icon nc-button-power"></i>
+                            <p>Log Out</p>
+                        </a>
+                    </li>
+                    <% if (page_name === 'settings') { %> <li class="nav-item active"> <% } else { %> <li> <% } %> 
+                        <a class="nav-link" href="/settings">
+                            <i class="nc-icon nc-settings-gear-64"></i>
+                            <p>Settings</p>
+                        </a>
+                    </li>
+                <% } 
+                else { %>
+                    <li>
+                        <a class="nav-link" href="/guest_register">
+                            <i class="nc-icon nc-circle-09"></i>
+                            <p>Register</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/guest_signin">
+                            <i class="nc-icon nc-button-power"></i>
+                            <p>Log In</p>
+                        </a>
+                    </li>
+                <% } %>
 
-            <li class="nav-item active active-pro">
-                <a class="nav-link active" href="/help">
-                    <i class="nc-icon nc-puzzle-10"></i>
-                    <p>Help</p>
-                </a>
-            </li>
-        </ul>
+                <li class="nav-item active active-pro">
+                    <a class="nav-link active" href="/help">
+                        <i class="nc-icon nc-puzzle-10"></i>
+                        <p>Help</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
 </body>
 <% include footer.ejs %>

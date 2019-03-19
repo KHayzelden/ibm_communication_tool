@@ -1,5 +1,8 @@
 var socket = io();
 
+/**
+ * Display the results from server
+ */
 socket.on('show results', (data) =>{
 	if(data == null){
 	return;
@@ -41,29 +44,32 @@ socket.on('show results', (data) =>{
     })(i);
 
 });
+
 socket.on('message', function(data){
     console.log('Connection successful!');
 });
 
+/**
+ * Load the trend topic from twitter API
+ */
 $(window).on('load', function(){
- socket.emit('get trending topics');
+    socket.emit('get trending topics');
+    socket.on('show trending topics', (data) =>{
+    
+    var topics = data.trending_topics;
+    var div = document.getElementById("trending topics");
 
- socket.on('show trending topics', (data) =>{
-  console.log('Get topics!');
+    for(var i = 0; i < topics.length; i++){
+        let trend = topics[i].name;
+    var a = document.createElement('a');
+    a.setAttribute("id", trend);
+    a.setAttribute("class", "topic");
+    a.appendChild(document.createTextNode(trend));
+    div.appendChild(a);
+    }
+    let trends = document.getElementsByClassName("topic");
+    console.log(trends);
 
-  var topics = data.trending_topics;
-  var div = document.getElementById("trending topics");
-
-  for(var i = 0; i < topics.length; i++){
-      let trend = topics[i].name;
-   var a = document.createElement('a');
-   a.setAttribute("id", trend);
-   a.setAttribute("class", "topic");
-   a.appendChild(document.createTextNode(trend));
-   div.appendChild(a);
-  }
-  let trends = document.getElementsByClassName("topic");
-  console.log(trends);
         for ( var i = 0; i < trends.length; i++ ) (function(i){
             trends[i].onclick = function() {
                 // do something
@@ -72,10 +78,14 @@ $(window).on('load', function(){
                 document.getElementById("searchbarsmall").value = trends[i].innerText;
             }
         })(i);
- });
-
+    });
 });
 
+/**
+ * Push search results into the database
+ * @param {String} data Search keyword
+ * @param {*} searchJson Search results
+ */
 function push_to_db(data, searchJson){
 	 var user = $("#userEmail").val();
 	 var time = Date.now();
@@ -96,30 +106,44 @@ function push_to_db(data, searchJson){
 	 });
 }
 
+/**
+ * Send to keyword to the server
+ * @param {*} keywords 
+ */
 function showResults(keywords) {
- console.log("Showing results");
- var ul = document.getElementById("search_result_li");
-    ul.innerText = "";
- document.getElementById('loader_container').style.display = 'block';
- document.getElementById('searchResults').style.display = "block";
- document.getElementById('speak_btn').disabled=true;
- document.getElementById('search_btn').disabled=true;
- let trends = document.getElementsByClassName("topic");
-    for ( var i = 0; i < trends.length; i++ ) (function(i){
-     trends[i].onclick = null;
-    })(i);
+    console.log("Showing results");
+    var ul = document.getElementById("search_result_li");
+        ul.innerText = "";
+    document.getElementById('loader_container').style.display = 'block';
+    document.getElementById('searchResults').style.display = "block";
+    document.getElementById('speak_btn').disabled=true;
+    document.getElementById('search_btn').disabled=true;
+    let trends = document.getElementsByClassName("topic");
+        for ( var i = 0; i < trends.length; i++ ) (function(i){
+            trends[i].onclick = null;
+        })(i);
 
-   socket.emit('search keywords', keywords);
+    socket.emit('search keywords', keywords);
 }
 
+/**
+ * Close the search results
+ */
 function closeResults() {
    document.getElementById('searchResults').style.display = "none";
 }
 
+/**
+ * Voice the selected result
+ * @param {*} message selected results
+ */
 function voice(message) {
  responsiveVoice.speak(message);
 }
 
+/**
+ * Listen to the database change to display bookmark info
+ */
 db.changes({ 
     live: true,
     include_docs: true

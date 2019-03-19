@@ -1,6 +1,11 @@
 var isEditSearch = false;
 var isEditSentence = false;
 
+/**
+ * Enter into Edit mode
+ * @param #editbutton stands for search keyword
+ * @param #editbutton1 stands for search sentence
+ */
 $("#editbutton").click(function(){
     
     if($(this).html() == "Edit")
@@ -48,6 +53,10 @@ $("#editbutton1").click(function(){
     }     
 });
 
+/**
+ * Remove the checked status when back to normal mode
+ * @param {*} butt parent class
+ */
 function isCheck(butt){
     butt.parent().next().children().children().each(function(){
             
@@ -57,6 +66,10 @@ function isCheck(butt){
     });
 }
 
+/**
+ * Check whether at least one checkbox is selected
+ * @param {*} butt parent class
+ */
 function isSelect(butt){
     var value = false;
     butt.parent().next().children().children().each(function(){
@@ -67,6 +80,9 @@ function isSelect(butt){
     return value;   
 }
 
+/**
+ * Delete the bookmark search/sentenes
+ */
 $('#deleteButton').click(function(){
     if(isSelect($(this))){
         copyText($(this));
@@ -89,7 +105,10 @@ $('#deleteButton1').click(function(){
     }
 })
   
-/* delete the item */
+/**
+ * Delete the item
+ * @param {*} butt parent class
+ */
 function copyText(butt){
     swal({
             title: "Are you sure?",
@@ -116,7 +135,7 @@ function copyText(butt){
         });
 }
 
-/* update content */
+/* Update content */
 $('#list-sentences').on("click", "a", function(){
     if(isEditSentence){
         inText(this.id, this.rev, $(this).children(':first').text(), 'sentence');
@@ -129,6 +148,9 @@ $('#list-searches').on("click", "a", function(){
     }
 });
 
+/**
+ * Create the local and remote database and start sync
+ */
 var syncHandler;
 var dbName = document.getElementById("hiddendb").innerText;
 var db = new PouchDB('ibm-communication');  //create the database
@@ -148,6 +170,9 @@ syncHandler.on('error', function (err) {
     console.log("Error",err);
 });
 
+/**
+ * Listen the database changes for deleting/inserting/updating
+ */
 db.changes({ 
     live: true,
     include_docs: true
@@ -174,7 +199,7 @@ db.changes({
         }
         var HTMLString = 
             '<a id="' + change.doc._id + '" rev="' + change.doc._rev + '" class="list-group-item' +
-            ' d-flex justify-content-between align-items-center draggable="true" " href="#list-item-1">' +
+            ' d-flex justify-content-between align-items-center" href="#list-item-1">' +
                 '<div>' + change.doc.term + '</div>' +
                 '<span class="'+ boxType +'" style = "display:none">' +
                     '<div class="form-check">' + 
@@ -194,6 +219,10 @@ db.changes({
     }
 });
 
+/**
+ * Add new searches/sentences
+ * Time out works for focus on input 
+ */
 $('#addbutton1').click(function(){
     $("#addSentence").modal('toggle');
     setTimeout(function(){
@@ -262,7 +291,13 @@ $("#inputsearch").focus(function() {
     $("#warninginput2").css("visibility", "hidden");
 })
 
-/* Update content */
+/**
+ * Update the content in popup window
+ * @param {String} getId obtain the current id
+ * @param {String} rev obtain the current rev
+ * @param {String} text obtain the text bound with the id
+ * @param {String} type obtain the update information type: search/sentence
+ */
 function inText(getId, rev, text,type){
     swal("Enter what you want to update:", {
         content: {
@@ -296,32 +331,3 @@ function inText(getId, rev, text,type){
         }
       });
 }
-
-var iosDragDropShim = { enableEnterLeave: true } 
-var dragElement = null;
-function bindDrag(source) {
-    source.on('dragstart', function (event) {
-        dragElement = $(this);
-        $(this).css("background-color","#f8f8f8");
-    });
-
-    source.on('dragend', function (event) {
-        $(event.target).css("background-color","#fff");
-        event.preventDefault();
-    });
-
-    source.on('dragenter', function (event) {
-        if($(this).prev().is(dragElement)){
-            dragElement.insertAfter($(this)); 
-        } else if($(this).next().is(dragElement)){
-            dragElement.insertBefore($(this)); 
-        }
-    });
-}
-document.ondragover = function(e){e.preventDefault();}        
-document.ondrop = function(e){e.preventDefault();}
-
-var source = $('.list-group-item');
-source.each(function(){
-    bindDrag($(this));
-});

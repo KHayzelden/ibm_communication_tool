@@ -1,8 +1,16 @@
+/**
+ * Load new the history list
+ */
 $(window).on('load', function(){
-	// new the history list
 	show_history(null);
 });
 
+/**
+ * Refresh the history list
+ * @param {Boolean} needRefresh Verify if needs to be refreshed or not
+ * @param {String} data The data to refresh 
+ * @param {String} types types to refresh time or keyword
+ */
 function refresh_history_list(needRefresh, data, types){
 	var container = document.getElementById("history_list");
 
@@ -89,6 +97,10 @@ function refresh_history_list(needRefresh, data, types){
 	}
 }
 
+/**
+ * Retrieve the history
+ * @param {String} keywords obtain the keyword to filter the history list
+ */
 function show_history(keywords) {
 	if(keywords == null){
 		db.allDocs({include_docs:true}, function(err, doc){
@@ -107,7 +119,9 @@ function show_history(keywords) {
 	}
 }
 
-/* clear history function */
+/**
+ * Clear the history info
+ */
 $('#clearButton').click(function(){
 	console.log("work");
 	if($(this).html() == "Clear History")
@@ -155,15 +169,18 @@ $('#clearButton').click(function(){
 	}
 })
 
-	db.changes({ 
-		live: true,
-		include_docs: true
-	}).on('change', function (change) {
-		if(change.deleted){
-			var deleteItem = $('#'+change.id);
-			console.log(change.id);
-			if(deleteItem.length) {
-				deleteItem.remove();
-			}
+/**
+ * Listen to the database changes
+ */
+db.changes({ 
+	live: true,
+	include_docs: true
+}).on('change', function (change) {
+	if(change.deleted){
+		var deleteItem = $('#'+change.id);
+		console.log(change.id);
+		if(deleteItem.length) {
+			deleteItem.remove();
 		}
-	});
+	}
+});
