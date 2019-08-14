@@ -1,6 +1,6 @@
 # IBM Watson Communication Tool with Node-RED
 
-Hello! The following video will walk you through the creation and design of this project: https://studio.youtube.com/video/D-5V2NXMUL8/edit
+Hello! The following video will walk you through the creation and design of this project: https://www.youtube.com/watch?v=D-5V2NXMUL8
 
 Additionally, an indepth report on the project can be found in the base directory. A PDF titled "UCL/IBM Watson Communication Tool Summary" contains all details and future ideas for this project.
 
