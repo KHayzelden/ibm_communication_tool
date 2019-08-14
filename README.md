@@ -1,4 +1,4 @@
-#IBM Watson Communication Tool with Node-RED
+# IBM Watson Communication Tool with Node-RED
 
 Hello! The following video will walk you through the creation and design of this project: https://studio.youtube.com/video/D-5V2NXMUL8/edit
 
