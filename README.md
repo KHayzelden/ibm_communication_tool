@@ -2,11 +2,17 @@
 
 Hello! The following video will walk you through the creation and design of this project: https://studio.youtube.com/video/D-5V2NXMUL8/edit
 
+Additionally, an indepth report on the project can be found in the base directory. A PDF titled "UCL/IBM Watson Communication Tool Summary" contains all details and future ideas for this project.
+
 Unfortunately this project is not currently maintained but is an open source prototype that anyone can take on. The instructions to move this project onto your own IBM and Node-RED accounts are provided. If there are any difficulties or questions feel free to email me!
 
 
 
-# Node.js Hello World Sample
+
+------------------------------
+
+
+## Node.js Hello World Sample
 
 This application demonstrates a simple, reusable Node.js web application based on the Express framework.
 
