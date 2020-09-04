@@ -18,7 +18,7 @@
 		"express-session": "^1.15.1",
 		"get-twitter-bearer-token": "^1.0.0",
 		"ibmcloud-appid": "^5.0.0",
-		"jquery.json-viewer": "^1.1.0",
+		"jquery.json-viewer": "^1.3.0",
 		"nconf": "^0.10.0",
 		"passport": "^0.3.2",
 		"socket.io": "^2.2.0",
