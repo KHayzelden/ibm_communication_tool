@@ -13,7 +13,7 @@
 		"cookie-parser": "^1.4.3",
 		"dotenv": "^4.0.0",
 		"ejs": "^2.6.1",
-		"express": "^4.16.4",
+		"express": "^4.17.3",
 		"express-enforces-ssl": "^1.1.0",
 		"express-session": "^1.15.1",
 		"get-twitter-bearer-token": "^1.0.0",
